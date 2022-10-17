@@ -259,14 +259,14 @@ namespace Microsoft.Maui.Controls
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void SetValueFromRenderer(BindableProperty property, object value)
 		{
-			SetValueCore(property, value);
+			SetValue(property, value, specificity: SetterSpecificity.FromHandler);
 		}
 
 		/// <include file="../../docs/Microsoft.Maui.Controls/Element.xml" path="//Member[@MemberName='SetValueFromRenderer'][2]/Docs/*" />
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public void SetValueFromRenderer(BindablePropertyKey property, object value)
 		{
-			SetValueCore(property, value);
+			SetValue(property, value, specificity: SetterSpecificity.FromHandler);
 		}
 
 		/// <include file="../../docs/Microsoft.Maui.Controls/Element.xml" path="//Member[@MemberName='EffectIsAttached']/Docs/*" />
@@ -632,7 +632,9 @@ namespace Microsoft.Maui.Controls
 		}
 
 		void OnResourceChanged(BindableProperty property, object value)
+#pragma warning disable CS0618 // Type or member is obsolete
 			=> SetValueCore(property, value, SetValueFlags.ClearOneWayBindings | SetValueFlags.ClearTwoWayBindings);
+#pragma warning restore CS0618 // Type or member is obsolete
 
 		public event EventHandler<ParentChangingEventArgs> ParentChanging;
 		public event EventHandler ParentChanged;

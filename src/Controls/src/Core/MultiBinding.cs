@@ -115,7 +115,7 @@ namespace Microsoft.Maui.Controls
 					{
 						if (ReferenceEquals(values[i], Binding.DoNothing) || ReferenceEquals(values[i], BindableProperty.UnsetValue))
 							continue;
-						_proxyObject.SetValueCore(_bpProxies[i], values[i], SetValueFlags.None);
+						_proxyObject.SetValue(_bpProxies[i], values[i]);
 					}
 				}
 				finally

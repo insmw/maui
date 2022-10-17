@@ -528,13 +528,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		public void ValidateValue()
+		public void InvalidValueNotApplied()
 		{
 			var property = BindableProperty.Create(nameof(MockBindable.Foo), typeof(string), typeof(MockBindable), null,
 				validateValue: (b, v) => false);
 
 			var mock = new MockBindable();
-			Assert.Throws<ArgumentException>(() => mock.SetValue(property, null));
+			mock.SetValue(property, null);
+			Assert.Equal(property.DefaultValue, mock.GetValue(property));
 		}
 
 		[Fact]
@@ -689,7 +690,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		public void TestReadOnly()
+		public void TestReadOnlyProperties()
 		{
 			var bindablePropertyKey = BindableProperty.CreateReadOnly(nameof(MockBindable.Foo), typeof(string), typeof(MockBindable), "DefaultValue");
 			var bindableProperty = bindablePropertyKey.BindableProperty;
@@ -700,10 +701,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.SetValue(bindablePropertyKey, "Bar");
 			Assert.Equal("Bar", bindable.GetValue(bindableProperty));
 
-			Assert.Throws<InvalidOperationException>(() => bindable.SetValue(bindableProperty, "Baz"));
+			bindable.SetValue(bindableProperty, "Baz");
 			Assert.Equal("Bar", bindable.GetValue(bindableProperty));
 
-			Assert.Throws<InvalidOperationException>(() => bindable.ClearValue(bindableProperty));
+			bindable.ClearValue(bindableProperty);
+			Assert.Equal("Bar", bindable.GetValue(bindableProperty));
 
 			bindable.ClearValue(bindablePropertyKey);
 			Assert.Equal("DefaultValue", bindable.GetValue(bindableProperty));
@@ -719,6 +721,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var vm = new MockViewModel();
 
 			bindable.SetBinding(bindableProperty, new Binding("Text", BindingMode.TwoWay));
+			bindable.BindingContext = vm;
+
+			Assert.Equal("DefaultValue", bindable.GetValue(bindableProperty));
+		}
+		[Fact]
+
+		public void TestBindingOneWayOnReadOnly()
+		{
+			var bindablePropertyKey = BindableProperty.CreateReadOnly(nameof(MockBindable.Foo), typeof(string), typeof(MockBindable), "DefaultValue", BindingMode.OneWayToSource);
+			var bindableProperty = bindablePropertyKey.BindableProperty;
+
+			var bindable = new MockBindable();
+			var vm = new MockViewModel();
+
+			bindable.SetBinding(bindableProperty, new Binding("Text", BindingMode.OneWay));
 			bindable.BindingContext = vm;
 
 			Assert.Equal("DefaultValue", bindable.GetValue(bindableProperty));
@@ -939,7 +956,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void StyleValueIsOverridenByValue()
 		{
 			var label = new Label();
-			label.SetValue(Label.TextProperty, "Foo", true);
+			label.SetValue(Label.TextProperty, "Foo", new SetterSpecificity(100,0,0,0));
 			Assert.Equal("Foo", label.Text);
 
 			label.SetValue(Label.TextProperty, "Bar");
@@ -977,7 +994,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var label = new Label();
 			label.BindingContext = new { foo = "Foo", bar = "Bar" };
-			label.SetValue(Label.TextProperty, "Foo", true);
+			label.SetValue(Label.TextProperty, "Foo", new SetterSpecificity(100, 0, 0, 0));
 			Assert.Equal("Foo", label.Text);
 
 			label.SetBinding(Label.TextProperty, "bar");
@@ -1020,7 +1037,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				{"bar", "Bar"}
 			};
 			label.BindingContext = new { foo = "Foo", bar = "Bar" };
-			label.SetValue(Label.TextProperty, "Foo", true);
+			label.SetValue(Label.TextProperty, "Foo", new SetterSpecificity(100, 0, 0, 0));
 			Assert.Equal("Foo", label.Text);
 
 			label.SetDynamicResource(Label.TextProperty, "bar");
@@ -1067,7 +1084,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			label.SetValue(Label.TextProperty, "Foo");
 			Assert.Equal("Foo", label.Text);
 
-			label.SetValue(Label.TextProperty, "Bar", true);
+			label.SetValue(Label.TextProperty, "Bar", new SetterSpecificity(100, 0, 0, 0));
 			Assert.Equal("Foo", label.Text);
 		}
 		[Fact]
@@ -1078,7 +1095,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			label.BindingContext = new { foo = "Foo" };
 			Assert.Equal("Foo", label.Text);
 
-			label.SetValue(Label.TextProperty, "Bar", true);
+			label.SetValue(Label.TextProperty, "Bar", new SetterSpecificity(100, 0, 0, 0));
 			Assert.Equal("Foo", label.Text);
 		}
 		[Fact]
@@ -1091,7 +1108,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			Assert.Equal("Foo", label.Text);
 
-			label.SetValue(Label.TextProperty, "Bar", true);
+			label.SetValue(Label.TextProperty, "Bar", new SetterSpecificity(100, 0, 0, 0));
 			Assert.Equal("Foo", label.Text);
 		}
 
@@ -1187,10 +1204,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void StyleValueIsOverridenByStyleValue()
 		{
 			var label = new Label();
-			label.SetValue(Label.TextProperty, "Foo", true);
+			label.SetValue(Label.TextProperty, "Foo", new SetterSpecificity(100, 0, 0, 0));
 			Assert.Equal("Foo", label.Text);
 
-			label.SetValue(Label.TextProperty, "Bar", true);
+			label.SetValue(Label.TextProperty, "Bar", new SetterSpecificity(100, 0, 0, 0));
 			Assert.Equal("Bar", label.Text);
 		}
 
@@ -1202,7 +1219,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			label.BindingContext = new { foo = "Foo" };
 			Assert.Equal("Foo", label.Text);
 
-			label.SetValue(Label.TextProperty, "Bar", true);
+			label.SetValue(Label.TextProperty, "Bar", new SetterSpecificity(100, 0, 0, 0));
 			Assert.Equal("Bar", label.Text);
 		}
 
@@ -1216,7 +1233,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			Assert.Equal("Foo", label.Text);
 
-			label.SetValue(Label.TextProperty, "Bar", true);
+			label.SetValue(Label.TextProperty, "Bar", new SetterSpecificity(100, 0, 0, 0));
 			Assert.Equal("Bar", label.Text);
 		}
 
@@ -1225,7 +1242,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var label = new Label();
 			label.BindingContext = new { foo = "Foo", bar = "Bar" };
-			label.SetValue(Label.TextProperty, "Foo", true);
+			label.SetValue(Label.TextProperty, "Foo", new SetterSpecificity(100, 0, 0, 0));
 			Assert.Equal("Foo", label.Text);
 
 			label.SetBinding(Label.TextProperty, new Binding("bar"), true);
@@ -1268,7 +1285,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				{"bar", "Bar"}
 			};
 			label.BindingContext = new { foo = "Foo", bar = "Bar" };
-			label.SetValue(Label.TextProperty, "Foo", true);
+			label.SetValue(Label.TextProperty, "Foo", new SetterSpecificity(100, 0, 0, 0));
 			Assert.Equal("Foo", label.Text);
 
 			label.SetDynamicResource(Label.TextProperty, "bar", true);

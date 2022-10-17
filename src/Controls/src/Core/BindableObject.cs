@@ -50,9 +50,35 @@ namespace Microsoft.Maui.Controls
 		public event EventHandler BindingContextChanged;
 
 		/// <include file="../../docs/Microsoft.Maui.Controls/BindableObject.xml" path="//Member[@MemberName='ClearValue'][1]/Docs/*" />
-		public void ClearValue(BindableProperty property) => ClearValue(property, fromStyle: false, checkAccess: true);
+		public void ClearValue(BindableProperty property)
+		{
+			if (property == null)
+				throw new ArgumentNullException(nameof(property));
 
-		internal void ClearValue(BindableProperty property, bool fromStyle) => ClearValue(property, fromStyle: fromStyle, checkAccess: true);
+			if (property.IsReadOnly)
+			{
+				Application.Current?.FindMauiContext()?.CreateLogger<BindableObject>()?.LogWarning($"Cannot set the BindableProperty \"{property.PropertyName}\" because it is readonly.");
+				return;
+			}
+
+			ClearValueCore(property, fromStyle: false);
+		}
+
+		internal void ClearValue(BindableProperty property, SetterSpecificity specificity)
+		{
+			if (property == null)
+				throw new ArgumentNullException(nameof(property));
+
+			if (property.IsReadOnly)
+			{
+				Application.Current?.FindMauiContext()?.CreateLogger<BindableObject>()?.LogWarning($"Cannot set the BindableProperty \"{property.PropertyName}\" because it is readonly.");
+				return;
+			}
+
+			var fromStyle = specificity.Style > 0;
+
+			ClearValueCore(property, fromStyle: fromStyle);
+		}
 
 		/// <include file="../../docs/Microsoft.Maui.Controls/BindableObject.xml" path="//Member[@MemberName='ClearValue'][2]/Docs/*" />
 		public void ClearValue(BindablePropertyKey propertyKey)
@@ -60,17 +86,11 @@ namespace Microsoft.Maui.Controls
 			if (propertyKey == null)
 				throw new ArgumentNullException(nameof(propertyKey));
 
-			ClearValue(propertyKey.BindableProperty, fromStyle: false, checkAccess: false);
+			ClearValueCore(propertyKey.BindableProperty, fromStyle: false);
 		}
 
-		void ClearValue(BindableProperty property, bool fromStyle, bool checkAccess)
+		void ClearValueCore(BindableProperty property, bool fromStyle)
 		{
-			if (property == null)
-				throw new ArgumentNullException(nameof(property));
-
-			if (checkAccess && property.IsReadOnly)
-				throw new InvalidOperationException($"The BindableProperty \"{property.PropertyName}\" is readonly.");
-
 			BindablePropertyContext bpcontext = GetContext(property);
 			if (bpcontext == null)
 				return;
@@ -203,8 +223,10 @@ namespace Microsoft.Maui.Controls
 		}
 
 		/// <include file="../../docs/Microsoft.Maui.Controls/BindableObject.xml" path="//Member[@MemberName='SetBinding']/Docs/*" />
-		public void SetBinding(BindableProperty targetProperty, BindingBase binding) => SetBinding(targetProperty, binding, false);
+		public void SetBinding(BindableProperty targetProperty, BindingBase binding)
+			=> SetBinding(targetProperty, binding, false);
 
+		//FIXME, use specificity
 		internal void SetBinding(BindableProperty targetProperty, BindingBase binding, bool fromStyle)
 		{
 			if (targetProperty == null)
@@ -213,15 +235,20 @@ namespace Microsoft.Maui.Controls
 			if (fromStyle && !CanBeSetFromStyle(targetProperty))
 				return;
 
+			if (targetProperty.IsReadOnly && binding.Mode == BindingMode.OneWay)
+			{
+				Application.Current?.FindMauiContext()?.CreateLogger<BindableObject>()?.LogWarning($"Cannot set the a OneWay Binding \"{targetProperty.PropertyName}\" because it is readonly.");
+				return;
+			}
+
 			var context = GetOrCreateContext(targetProperty);
 			if (fromStyle)
 				context.Attributes |= BindableContextAttributes.IsSetFromStyle;
 			else
 				context.Attributes &= ~BindableContextAttributes.IsSetFromStyle;
 
-			if (context.Binding != null)
-				context.Binding.Unapply();
-
+			context.Binding?.Unapply();
+			
 			BindingBase oldBinding = context.Binding;
 			context.Binding = binding ?? throw new ArgumentNullException(nameof(binding));
 
@@ -342,6 +369,7 @@ namespace Microsoft.Maui.Controls
 
 		internal void SetDynamicResource(BindableProperty property, string key) => SetDynamicResource(property, key, false);
 
+		//FIXME, use specificity
 		internal void SetDynamicResource(BindableProperty property, string key, bool fromStyle)
 		{
 			if (property == null)
@@ -363,7 +391,19 @@ namespace Microsoft.Maui.Controls
 		}
 
 		/// <include file="../../docs/Microsoft.Maui.Controls/BindableObject.xml" path="//Member[@MemberName='SetValue'][1]/Docs/*" />
-		public void SetValue(BindableProperty property, object value) => SetValue(property, value, false, true);
+		public void SetValue(BindableProperty property, object value)
+		{
+			if (property == null)
+				throw new ArgumentNullException(nameof(property));
+
+			if (property.IsReadOnly)
+			{
+				Application.Current?.FindMauiContext()?.CreateLogger<BindableObject>()?.LogWarning($"Cannot set the BindableProperty \"{property.PropertyName}\" because it is readonly.");
+				return;
+			}
+
+			SetValueFIXME(property, value, SetterSpecificity.ManualValueSetter);
+		}
 
 		/// <include file="../../docs/Microsoft.Maui.Controls/BindableObject.xml" path="//Member[@MemberName='SetValue'][2]/Docs/*" />
 		public void SetValue(BindablePropertyKey propertyKey, object value)
@@ -371,36 +411,60 @@ namespace Microsoft.Maui.Controls
 			if (propertyKey == null)
 				throw new ArgumentNullException(nameof(propertyKey));
 
-			SetValue(propertyKey.BindableProperty, value, false, false);
+			if (propertyKey == null)
+				throw new ArgumentNullException(nameof(propertyKey));
+
+			SetValueFIXME(propertyKey.BindableProperty, value, SetterSpecificity.ManualValueSetter);
 		}
 
-		internal void SetValue(BindableProperty property, object value, bool fromStyle) => SetValue(property, value, fromStyle, true);
-
-		void SetValue(BindableProperty property, object value, bool fromStyle, bool checkAccess)
+		internal void SetValue(BindableProperty property, object value, SetterSpecificity specificity)
 		{
 			if (property == null)
 				throw new ArgumentNullException(nameof(property));
 
-			if (checkAccess && property.IsReadOnly)
-				throw new InvalidOperationException($"The BindableProperty \"{property.PropertyName}\" is readonly.");
+			if (property.IsReadOnly)
+			{
+				Application.Current?.FindMauiContext()?.CreateLogger<BindableObject>()?.LogWarning($"Cannot set the BindableProperty \"{property.PropertyName}\" because it is readonly.");
+				return;
+			}
 
+			SetValueFIXME(property, value, specificity);
+		}
+
+		internal void SetValue(BindablePropertyKey propertyKey, object value, SetterSpecificity specificity)
+		{
+			if (propertyKey == null)
+				throw new ArgumentNullException(nameof(propertyKey));
+
+
+			SetValueFIXME(propertyKey.BindableProperty, value, specificity);
+		}
+
+		//FIXME: GO AWAY
+		void SetValueFIXME(BindableProperty property, object value, SetterSpecificity specificity)
+		{
+			//FIXME
+			var fromStyle = specificity.Style > 0;
 			if (fromStyle)
-				SetBackupStyleValue(property, value);
+				SetBackupStyleValue(property, value); 
 			if (fromStyle && !CanBeSetFromStyle(property))
 				return;
 
+#pragma warning disable CS0618 // Type or member is obsolete
 			SetValueCore(property, value, SetValueFlags.ClearOneWayBindings | SetValueFlags.ClearDynamicResource,
-				(fromStyle ? SetValuePrivateFlags.FromStyle : SetValuePrivateFlags.ManuallySet) | (checkAccess ? SetValuePrivateFlags.CheckAccess : 0));
+				(fromStyle ? SetValuePrivateFlags.FromStyle : SetValuePrivateFlags.ManuallySet), specificity );
+#pragma warning restore CS0618 // Type or member is obsolete
 		}
 
-		internal void SetValueCore(BindablePropertyKey propertyKey, object value, SetValueFlags attributes = SetValueFlags.None)
-			=> SetValueCore(propertyKey.BindableProperty, value, attributes, SetValuePrivateFlags.None);
 
 		/// <include file="../../docs/Microsoft.Maui.Controls/BindableObject.xml" path="//Member[@MemberName='SetValueCore']/Docs/*" />
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public void SetValueCore(BindableProperty property, object value, SetValueFlags attributes = SetValueFlags.None)
-			=> SetValueCore(property, value, attributes, SetValuePrivateFlags.Default);
+		//WHAT DO I BREAK BY MAKING THIS INTERNAL
+		[Obsolete("go away")]
+		internal void SetValueCore(BindableProperty property, object value, SetValueFlags attributes = SetValueFlags.None)
+			=> SetValueCore(property, value, attributes, SetValuePrivateFlags.Default, new SetterSpecificity());
 
+		//FIXME: GO AWAY
 		void SetBackupStyleValue(BindableProperty property, object value)
 		{
 			var context = GetOrCreateContext(property);
@@ -408,21 +472,20 @@ namespace Microsoft.Maui.Controls
 			context.StyleValue = value;
 		}
 
+		//FIXME: GO AWAY
 		internal void SetValueCore(BindableProperty property, object value, SetValueFlags attributes, SetValuePrivateFlags privateAttributes)
-		{
-			bool checkAccess = (privateAttributes & SetValuePrivateFlags.CheckAccess) != 0;
-			bool manuallySet = (privateAttributes & SetValuePrivateFlags.ManuallySet) != 0;
-			bool silent = (privateAttributes & SetValuePrivateFlags.Silent) != 0;
-			bool fromStyle = (privateAttributes & SetValuePrivateFlags.FromStyle) != 0;
-			bool converted = (privateAttributes & SetValuePrivateFlags.Converted) != 0;
+			=> SetValueCore(property, value, attributes, privateAttributes, new SetterSpecificity());
 
+		internal void SetValueCore(BindableProperty property, object value, SetValueFlags attributes, SetValuePrivateFlags privateAttributes, SetterSpecificity specificity)
+		{
 			if (property == null)
 				throw new ArgumentNullException(nameof(property));
-			if (checkAccess && property.IsReadOnly)
-			{
-				Application.Current?.FindMauiContext()?.CreateLogger<BindableObject>()?.LogWarning($"Cannot set the BindableProperty \"{property.PropertyName}\" because it is readonly.");
-				return;
-			}
+
+			//bool checkAccess = (privateAttributes & SetValuePrivateFlags.CheckAccess) != 0;
+			//bool manuallySet = (privateAttributes & SetValuePrivateFlags.ManuallySet) != 0;
+			bool silent = (privateAttributes & SetValuePrivateFlags.Silent) != 0;
+			bool fromStyle = (privateAttributes & SetValuePrivateFlags.FromStyle) != 0;
+			bool converted = (privateAttributes & SetValuePrivateFlags.Converted) != 0;			
 
 			if (!converted && !property.TryConvert(ref value))
 			{
@@ -431,19 +494,22 @@ namespace Microsoft.Maui.Controls
 			}
 
 			if (property.ValidateValue != null && !property.ValidateValue(this, value))
-				throw new ArgumentException($"Value is an invalid value for {property.PropertyName}", nameof(value));
+			{
+				Application.Current?.FindMauiContext()?.CreateLogger<BindableObject>()?.LogWarning($"Value is an invalid value for {property.PropertyName}");
+				return;
+			}
 
 			if (property.CoerceValue != null)
 				value = property.CoerceValue(this, value);
 
 			BindablePropertyContext context = GetOrCreateContext(property);
-			if (manuallySet)
-			{
-				context.Attributes |= BindableContextAttributes.IsManuallySet;
-				context.Attributes &= ~BindableContextAttributes.IsSetFromStyle;
-			}
-			else
-				context.Attributes &= ~BindableContextAttributes.IsManuallySet;
+			//if (manuallySet)
+			//{
+			//	context.Attributes |= BindableContextAttributes.IsManuallySet;
+			//	context.Attributes &= ~BindableContextAttributes.IsSetFromStyle;
+			//}
+			//else
+			//	context.Attributes &= ~BindableContextAttributes.IsManuallySet;
 
 			if (fromStyle)
 				context.Attributes |= BindableContextAttributes.IsSetFromStyle;
@@ -663,12 +729,14 @@ namespace Microsoft.Maui.Controls
 		internal enum SetValuePrivateFlags
 		{
 			None = 0,
-			CheckAccess = 1 << 0,
+			[Obsolete("no longer in use")]CheckAccess = 1 << 0,
 			Silent = 1 << 1,
-			ManuallySet = 1 << 2,
+			[Obsolete("no longer in use")] ManuallySet = 1 << 2,
 			FromStyle = 1 << 3,
 			Converted = 1 << 4,
+#pragma warning disable CS0618 // Type or member is obsolete
 			Default = CheckAccess
+#pragma warning restore CS0618 // Type or member is obsolete
 		}
 
 		internal class SetValueArgs

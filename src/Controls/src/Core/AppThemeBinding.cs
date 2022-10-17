@@ -61,7 +61,7 @@ namespace Microsoft.Maui.Controls
 			else
 				Set();
 
-			void Set() => target.SetValueCore(_targetProperty, GetValue());
+			void Set() => target.SetValue(_targetProperty, GetValue());
 		}
 
 		object _light;

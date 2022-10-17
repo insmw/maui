@@ -93,13 +93,21 @@ namespace Microsoft.Maui.Controls
 			set { SetStyle(value, ClassStyles, Style); }
 		}
 
-		public void Apply(BindableObject bindable)
+		public void Apply(BindableObject bindable, SetterSpecificity specificity)
 		{
-			ImplicitStyle?.Apply(bindable);
+			Apply(bindable);
+		}
+
+		 void Apply(BindableObject bindable)
+		{
+			//FIXME compute specificity
+			ImplicitStyle?.Apply(bindable, new SetterSpecificity(100,0,0,0));
 			if (ClassStyles != null)
 				foreach (var classStyle in ClassStyles)
-					((IStyle)classStyle)?.Apply(bindable);
-			Style?.Apply(bindable);
+					//FIXME compute specificity
+					((IStyle)classStyle)?.Apply(bindable, new SetterSpecificity(200,0,1,0));
+			//FIXME compute specificity
+			Style?.Apply(bindable, new SetterSpecificity(200,0,0,0));
 		}
 
 		public Type TargetType { get; }
@@ -190,13 +198,17 @@ namespace Microsoft.Maui.Controls
 			_classStyles = classStyles;
 			_style = style;
 
+			//FIXME compute specificity
 			if (shouldReApplyImplicitStyle)
-				ImplicitStyle?.Apply(Target);
+				ImplicitStyle?.Apply(Target, new SetterSpecificity(100, 0, 0, 0));
+
 			if (shouldReApplyClassStyle && ClassStyles != null)
 				foreach (var classStyle in ClassStyles)
-					((IStyle)classStyle)?.Apply(Target);
+					//FIXME compute specificity
+					((IStyle)classStyle)?.Apply(Target, new SetterSpecificity(200, 0, 1, 0));
 			if (shouldReApplyStyle)
-				Style?.Apply(Target);
+				//FIXME compute specificity
+				Style?.Apply(Target, new SetterSpecificity(200, 0, 0, 0));
 		}
 	}
 }

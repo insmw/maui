@@ -57,6 +57,9 @@ namespace Microsoft.Maui.Controls
 		//Setters and Condition are used by Trigger, DataTrigger and MultiTrigger
 		internal IList<Setter> Setters { get; }
 
+		//FIXME: add speicificity as ctor argument
+		internal SetterSpecificity Specificity { get; } = new SetterSpecificity();
+
 		void IAttachedObject.AttachTo(BindableObject bindable)
 		{
 			IsSealed = true;
@@ -104,7 +107,7 @@ namespace Microsoft.Maui.Controls
 				foreach (TriggerAction action in EnterActions)
 					action.DoInvoke(bindable);
 				foreach (Setter setter in Setters)
-					setter.Apply(bindable);
+					setter.Apply(bindable, Specificity);
 			}
 			else
 			{

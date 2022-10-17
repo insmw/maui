@@ -1011,5 +1011,186 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			button.ClearValue(Button.BackgroundColorProperty);
 			Assert.Equal(button.BackgroundColor, Colors.HotPink);
 		}
+
+		[Fact]
+		public void UnapplyingValueDefaultToStyle()
+		{
+			var label = new Label();
+			var style = new Style(typeof(Label))
+			{
+				Setters = {
+					new Setter { Property = Label.TextProperty, Value = "foo" },
+				}
+			};
+
+			Assert.Equal(label.Text, Label.TextProperty.DefaultValue);
+
+			label.Style = style;
+			Assert.Equal("foo", label.Text);
+
+			label.Text = "bar";
+			Assert.Equal("bar", label.Text);
+
+			label.ClearValue(Label.TextProperty);
+			Assert.Equal("foo", label.Text);
+		}
+
+		[Fact]
+		public void UnapplyingValueAfterStyleRemoval()
+		{
+			var label = new Label();
+			var style = new Style(typeof(Label)) { Setters = { new Setter { Property = Label.TextProperty, Value = "foo" } } };
+
+			Assert.Equal(label.Text, Label.TextProperty.DefaultValue);
+
+			label.Style = style;
+			Assert.Equal("foo", label.Text);
+
+			label.Text = "bar";
+			Assert.Equal("bar", label.Text);
+
+			label.ClearValue(Label.StyleProperty);
+			Assert.Equal("bar", label.Text);
+
+			label.ClearValue(Label.TextProperty);
+			Assert.Equal(Label.TextProperty.DefaultValue, label.Text);
+		}
+
+		[Fact]
+		public void UnapplyingStyleDefaultToImplicit1()
+		{
+			var stackLayout = new StackLayout {
+				Resources = new ResourceDictionary {
+					new Style(typeof(Label)) { Setters = { new Setter { Property = Label.TextProperty, Value = "implicit" } } },
+				}
+			};
+			var label = new Label();
+			var style = new Style(typeof(Label)) { Setters = { new Setter { Property = Label.TextProperty, Value = "style" }, } };
+
+			Assert.Equal(label.Text, Label.TextProperty.DefaultValue);
+
+			stackLayout.Children.Add(label);
+			Assert.Equal("implicit", label.Text);
+
+			label.Style = style;
+			Assert.Equal("style", label.Text);
+
+			label.Text = "value";
+			Assert.Equal("value", label.Text);
+
+			label.ClearValue(Label.StyleProperty);
+			Assert.Equal("value", label.Text);
+
+			label.ClearValue(Label.TextProperty);
+			Assert.Equal("implicit", label.Text);
+		}
+
+		[Fact]
+		public void UnapplyingStyleDefaultToImplicit2()
+		{
+			var stackLayout = new StackLayout
+			{
+				Resources = new ResourceDictionary {
+					new Style(typeof(Label)) { Setters = { new Setter { Property = Label.TextProperty, Value = "implicit" } } },
+				}
+			};
+			var label = new Label();
+			var style = new Style(typeof(Label)) { Setters = { new Setter { Property = Label.TextProperty, Value = "style" }, } };
+
+			Assert.Equal(label.Text, Label.TextProperty.DefaultValue);
+
+			label.Style = style;
+			Assert.Equal("style", label.Text);
+
+			stackLayout.Children.Add(label);
+			Assert.Equal("style", label.Text);
+
+			label.Text = "value";
+			Assert.Equal("value", label.Text);
+
+			label.ClearValue(Label.StyleProperty);
+			Assert.Equal("value", label.Text);
+
+			label.ClearValue(Label.TextProperty);
+			Assert.Equal("implicit", label.Text);
+		}
+
+		[Fact]
+		public void UnapplyingStyleDefaultToImplicit3()
+		{
+			var stackLayout = new StackLayout
+			{
+				Resources = new ResourceDictionary {
+					new Style(typeof(Label)) { Setters = { new Setter { Property = Label.TextProperty, Value = "implicit" } } },
+				}
+			};
+			var label = new Label();
+			var style = new Style(typeof(Label)) { Setters = { new Setter { Property = Label.TextProperty, Value = "style" }, } };
+
+			Assert.Equal(label.Text, Label.TextProperty.DefaultValue);
+
+			label.Text = "value";
+			Assert.Equal("value", label.Text);
+
+			label.Style = style;
+			Assert.Equal("value", label.Text);
+
+			stackLayout.Children.Add(label);
+			Assert.Equal("value", label.Text);
+
+			label.ClearValue(Label.StyleProperty);
+			Assert.Equal("value", label.Text);
+
+			label.ClearValue(Label.TextProperty);
+			Assert.Equal("implicit", label.Text);
+		}
+
+		[Fact]
+		public void UnapplyingStyleDefaultToImplicit4()
+		{
+			var stackLayout = new StackLayout
+			{
+				Resources = new ResourceDictionary {
+					new Style(typeof(Label)) { Setters = { new Setter { Property = Label.TextProperty, Value = "implicit" } } },
+				}
+			};
+			var label = new Label();
+			var style = new Style(typeof(Label)) { Setters = { new Setter { Property = Label.TextProperty, Value = "style" }, } };
+
+			Assert.Equal(label.Text, Label.TextProperty.DefaultValue);
+
+			stackLayout.Children.Add(label);
+			Assert.Equal("implicit", label.Text);
+
+			label.Style = style;
+			Assert.Equal("style", label.Text);
+
+			label.ClearValue(Label.StyleProperty);
+			Assert.Equal("implicit", label.Text);
+		}
+
+		[Fact]
+		public void UnapplyingStyleDefaultToImplicit5()
+		{
+			var stackLayout = new StackLayout
+			{
+				Resources = new ResourceDictionary {
+					new Style(typeof(Label)) { Setters = { new Setter { Property = Label.TextProperty, Value = "implicit" } } },
+				}
+			};
+			var label = new Label();
+			var style = new Style(typeof(Label)) { Setters = { new Setter { Property = Label.TextProperty, Value = "style" }, } };
+
+			Assert.Equal(label.Text, Label.TextProperty.DefaultValue);
+
+			label.Style = style;
+			Assert.Equal("style", label.Text);
+
+			stackLayout.Children.Add(label);
+			Assert.Equal("style", label.Text);
+
+			label.ClearValue(Label.StyleProperty);
+			Assert.Equal("implicit", label.Text);
+		}
 	}
 }

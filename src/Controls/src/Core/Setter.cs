@@ -58,7 +58,9 @@ namespace Microsoft.Maui.Controls
 			return this;
 		}
 
-		internal void Apply(BindableObject target, bool fromStyle = false)
+		
+
+		internal void Apply(BindableObject target, SetterSpecificity specificity)
 		{
 			if (target == null)
 				throw new ArgumentNullException(nameof(target));
@@ -66,7 +68,7 @@ namespace Microsoft.Maui.Controls
 			var targetObject = target;
 
 			if (!string.IsNullOrEmpty(TargetName) && target is Element element)
-				targetObject = element.FindByName(TargetName) as BindableObject ?? throw new ArgumentNullException(nameof(targetObject));
+				targetObject = element.FindByName(TargetName) as BindableObject ?? throw new XamlParseException($"Can not resole '{TargetName}' as Setter Target for '{target}'.");
 
 			if (Property == null)
 				return;
@@ -78,16 +80,19 @@ namespace Microsoft.Maui.Controls
 				_originalValues.Add(targetObject, originalValue);
 			}
 
+			var value = Value;
+			if (Value is IList<VisualStateGroup> visualStateGroupCollection)
+				value = visualStateGroupCollection.Clone();
+
+			//FIXME: use Specificity everywhere
+			var fromStyle = specificity.Style > 0;
 			if (Value is BindingBase binding)
 				targetObject.SetBinding(Property, binding.Clone(), fromStyle);
 			else if (Value is DynamicResource dynamicResource)
 				targetObject.SetDynamicResource(Property, dynamicResource.Key, fromStyle);
 			else
 			{
-				if (Value is IList<VisualStateGroup> visualStateGroupCollection)
-					targetObject.SetValue(Property, visualStateGroupCollection.Clone(), fromStyle);
-				else
-					targetObject.SetValue(Property, Value, fromStyle);
+				targetObject.SetValue(Property, Value, specificity: specificity);
 			}
 		}
 
@@ -115,12 +120,71 @@ namespace Microsoft.Maui.Controls
 
 			if (_originalValues.TryGetValue(targetObject, out object defaultValue))
 			{
+				//FIXME: unapply no longer need specificity
+				var specificity = fromStyle ? new SetterSpecificity(100,0,0,0) : SetterSpecificity.VisualStateSetter;
 				//reset default value, unapply bindings and dynamicResource
-				targetObject.SetValue(Property, defaultValue, fromStyle);
+				targetObject.SetValue(Property, defaultValue, specificity);
 				_originalValues.Remove(targetObject);
 			}
 			else
-				targetObject.ClearValue(Property, fromStyle);
+				//FIXME
+				targetObject.ClearValue(Property, new SetterSpecificity(100, 0, 0, 0));
+		}
+	}
+
+	internal readonly struct SetterSpecificity : IComparable<SetterSpecificity>
+	{
+		public static readonly SetterSpecificity FromHandler = new SetterSpecificity();
+		public static readonly SetterSpecificity VisualStateSetter = new SetterSpecificity(1, 0, 0, 0, 0, 0, 0);
+		public static readonly SetterSpecificity ManualValueSetter = new SetterSpecificity(0, 1, 0, 0, 0, 0, 0);
+		public static readonly SetterSpecificity DynamicResourceSetter = new SetterSpecificity(0, 1, 0, 0, 0, 0, 0);
+
+		//100-n: direct VSM (not from Style), n = max(99, distance between the RD and the target)
+		public int Vsm { get; }
+
+		//1: SetValue, SetBinding
+		public int Manual { get; }
+
+		//1: DynamicResource
+		public int DynamicResource { get; }
+
+		//XAML Style specificty
+		//100-n: implicit style, n = max(99, distance between the RD and the target)
+		//200-n: RD Style, n = max(99, distance between the RD and the target)
+		//200: local style, inline css,
+		//300-n: VSM, n = max(99, distance between the RD and the target)
+		//300: !important (not implemented)
+		public int Style { get; } 
+
+		//CSS Specificity, see https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
+		public int Id { get; }
+		public int Class { get; }
+		public int Type { get;  }
+
+		SetterSpecificity(int vsm, int manual, int dynamicresource, int style, int id, int @class, int type)
+		{
+			Vsm = vsm;
+			Manual = manual;
+			DynamicResource = dynamicresource;
+			Style = style;
+			Id = id;
+			Class = @class;
+			Type = type;
+		}
+
+		public SetterSpecificity(int style, int id, int @class, int type) : this(0, 0, 0, style, id, @class, type)
+		{
+		}
+
+		public int CompareTo(SetterSpecificity other)
+		{
+			if (Vsm != other.Vsm) return Vsm.CompareTo(other.Vsm);
+			if (Manual != other.Manual) return Manual.CompareTo(other.Manual);
+			if (DynamicResource != other.DynamicResource) return DynamicResource.CompareTo(other.DynamicResource);
+			if (Style != other.Style) return Style.CompareTo(other.Style);
+			if (Id != other.Id) return Id.CompareTo(other.Id);
+			if (Class != other.Class) return Class.CompareTo(other.Class);
+			return Type.CompareTo(other.Type);
 		}
 	}
 }

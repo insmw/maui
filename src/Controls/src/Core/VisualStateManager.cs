@@ -82,6 +82,8 @@ namespace Microsoft.Maui.Controls
 			var context = visualElement.GetContext(VisualStateGroupsProperty);
 			var fromStyle = (context.Attributes & BindableObject.BindableContextAttributes.IsSetFromStyle) == BindableObject.BindableContextAttributes.IsSetFromStyle;
 
+			//FIXME: should be 300 - distance
+			SetterSpecificity specificity = fromStyle ? new SetterSpecificity(300, 0, 0, 0) : SetterSpecificity.VisualStateSetter;
 			foreach (VisualStateGroup group in groups)
 			{
 				if (group.CurrentState?.Name == name)
@@ -112,7 +114,7 @@ namespace Microsoft.Maui.Controls
 				// Apply the setters from the new state
 				foreach (Setter setter in target.Setters)
 				{
-					setter.Apply(visualElement, fromStyle: fromStyle);
+					setter.Apply(visualElement, specificity);
 				}
 
 				return true;
