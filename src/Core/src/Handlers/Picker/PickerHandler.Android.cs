@@ -6,6 +6,7 @@ using Android.Graphics.Drawables;
 using Android.Text;
 using Android.Text.Style;
 using AResource = Android.Resource;
+using AView = Android.Views.View;
 
 namespace Microsoft.Maui.Handlers
 {
@@ -146,6 +147,8 @@ namespace Microsoft.Maui.Handlers
 
 				if (_dialog == null)
 					return;
+
+				_dialog.UpdateFlowDirection(PlatformView);
 
 				_dialog.SetCanceledOnTouchOutside(true);
 
