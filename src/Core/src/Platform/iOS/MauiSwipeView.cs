@@ -65,6 +65,9 @@ namespace Microsoft.Maui.Platform
 			AddGestureRecognizer(_panGestureRecognizer);
 		}
 
+		internal event EventHandler<SwipeItemsAddedEventArgs>? SwipeItemsAdded;
+		internal event EventHandler? SwipeItemsRemoved;
+
 		public override void LayoutSubviews()
 		{
 			base.LayoutSubviews();
@@ -297,6 +300,9 @@ namespace Microsoft.Maui.Platform
 			}
 
 			AddSubview(_actionView);
+
+			SwipeItemsAdded?.Invoke(this, new SwipeItemsAddedEventArgs(items));
+
 			BringSubviewToFront(_contentView);
 
 			LayoutSwipeItems(GetNativeSwipeItems());
@@ -692,6 +698,7 @@ namespace Microsoft.Maui.Platform
 			if (_actionView != null)
 			{
 				_actionView.RemoveFromSuperview();
+				SwipeItemsRemoved?.Invoke(this, EventArgs.Empty);
 			}
 
 			if (_swipeItemsRect != null)

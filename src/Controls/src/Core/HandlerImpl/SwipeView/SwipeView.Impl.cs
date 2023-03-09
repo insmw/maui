@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Microsoft.Maui.Controls
 {
-	/// <include file="../../../docs/Microsoft.Maui.Controls/SwipeView.xml" path="Type[@FullName='Microsoft.Maui.Controls.SwipeView']/Docs/*" />
+	/// <include file="../../../../docs/Microsoft.Maui.Controls/SwipeView.xml" path="Type[@FullName='Microsoft.Maui.Controls.SwipeView']/Docs/*" />
 	public partial class SwipeView : ISwipeView
 	{
 		bool _isOpen;
@@ -31,6 +33,9 @@ namespace Microsoft.Maui.Controls
 			}
 		}
 
+		readonly ObservableCollection<Element> _logicalChildren = new ObservableCollection<Element>();
+		internal override IReadOnlyList<Element> LogicalChildrenInternal => new ReadOnlyCollection<Element>(_logicalChildren);
+
 #if IOS
 		SwipeTransitionMode ISwipeView.SwipeTransitionMode =>
 			Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.SwipeView.GetSwipeTransitionMode(this);
@@ -40,7 +45,6 @@ namespace Microsoft.Maui.Controls
 #else
 		SwipeTransitionMode ISwipeView.SwipeTransitionMode => SwipeTransitionMode.Reveal;
 #endif
-
 
 		protected override void OnChildAdded(Element child)
 		{
@@ -109,6 +113,49 @@ namespace Microsoft.Maui.Controls
 				{
 					collectionView.Scrolled += OnParentScrolled;
 				}
+			}
+		}
+
+		internal void AddLogicalChild(Element element)
+		{
+			if (element == null)
+			{
+				return;
+			}
+
+			if (_logicalChildren.Contains(element))
+				return;
+
+			_logicalChildren.Add(element);
+			element.Parent = this;
+			OnChildAdded(element);
+			VisualDiagnostics.OnChildAdded(this, element);
+		}
+
+		internal void RemoveLogicalChild(Element element)
+		{
+			if (element == null)
+			{
+				return;
+			}
+
+			element.Parent = null;
+
+			if (!_logicalChildren.Contains(element))
+				return;
+
+			var oldLogicalIndex = _logicalChildren.IndexOf(element);
+			_logicalChildren.Remove(element);
+			OnChildRemoved(element, oldLogicalIndex);
+			VisualDiagnostics.OnChildRemoved(this, element, oldLogicalIndex);
+		}
+
+		internal void ClearLogicalChildren()
+		{
+			// Reverse for-loop, so children can be removed while iterating
+			for (int i = _logicalChildren.Count - 1; i >= 0; i--)
+			{
+				RemoveLogicalChild(_logicalChildren[i]);
 			}
 		}
 

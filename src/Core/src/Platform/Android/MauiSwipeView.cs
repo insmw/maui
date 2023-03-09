@@ -60,6 +60,9 @@ namespace Microsoft.Maui.Platform
 			AddView(Control, LayoutParams.MatchParent);
 		}
 
+		internal event EventHandler<SwipeItemsAddedEventArgs>? SwipeItemsAdded;
+		internal event EventHandler? SwipeItemsRemoved;
+
 		// temporary workaround to make it work
 		internal void SetElement(ISwipeView swipeView)
 		{
@@ -557,6 +560,8 @@ namespace Microsoft.Maui.Platform
 			}
 
 			AddView(_actionView);
+			SwipeItemsAdded?.Invoke(this, new SwipeItemsAddedEventArgs(items));
+
 			if (_contentView != null)
 			{
 				_contentView.BringToFront();
@@ -707,6 +712,8 @@ namespace Microsoft.Maui.Platform
 				_actionView.RemoveFromParent();
 				_actionView.Dispose();
 				_actionView = null;
+
+				SwipeItemsRemoved?.Invoke(this, EventArgs.Empty);
 			}
 
 			UpdateIsOpen(false);
