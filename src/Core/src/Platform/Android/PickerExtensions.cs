@@ -47,14 +47,13 @@ namespace Microsoft.Maui.Platform
 				platformPicker.Text = picker.GetItem(picker.SelectedIndex);
 		}
 
-		internal static void UpdateFlowDirection(this AlertDialog alertDialog, MauiPicker platformPicker)
+		internal static void UpdateFlowDirection(this AlertDialog alertDialog, IPicker picker)
 		{
-			// Propagate the MauiPicker LayoutDirection to the AlertDialog
 			if (alertDialog.Window?.DecorView is not null)
-				alertDialog.Window.DecorView.LayoutDirection = platformPicker.LayoutDirection;
+				alertDialog.Window.DecorView.UpdateFlowDirection(picker);
 
 			if (alertDialog.ListView is not null)
-				alertDialog.ListView.TextDirection = platformPicker.LayoutDirection.ToTextDirection();
+				alertDialog.ListView.UpdateFlowDirection(picker);
 		}
 	}
 }

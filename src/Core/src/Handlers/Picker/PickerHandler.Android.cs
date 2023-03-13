@@ -148,7 +148,7 @@ namespace Microsoft.Maui.Handlers
 				if (_dialog == null)
 					return;
 
-				_dialog.UpdateFlowDirection(PlatformView);
+				_dialog.UpdateFlowDirection(VirtualView);
 
 				_dialog.SetCanceledOnTouchOutside(true);
 

@@ -1,5 +1,4 @@
 using ALayoutDirection = Android.Views.LayoutDirection;
-using ATextDirection = Android.Views.TextDirection;
 
 namespace Microsoft.Maui.Platform
 {
@@ -15,19 +14,6 @@ namespace Microsoft.Maui.Platform
 					return FlowDirection.RightToLeft;
 				default:
 					return FlowDirection.MatchParent;
-			}
-		}
-
-		internal static ATextDirection ToTextDirection(this ALayoutDirection direction)
-		{
-			switch (direction)
-			{
-				case ALayoutDirection.Ltr:
-					return ATextDirection.Ltr;
-				case ALayoutDirection.Rtl:
-					return ATextDirection.Rtl;
-				default:
-					return ATextDirection.Inherit;
 			}
 		}
 	}

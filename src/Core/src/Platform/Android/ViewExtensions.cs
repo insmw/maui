@@ -270,12 +270,18 @@ namespace Microsoft.Maui.Platform
 				return;
 			}
 
+			if (platformView is ListView listView)
+			{
+				ListViewExtensions.UpdateFlowDirection(listView, view);
+				return;
+			}
+
 			platformView.LayoutDirection = GetLayoutDirection(view);
 		}
 
 		static ALayoutDirection GetLayoutDirection(IView view)
 		{
-			return view.FlowDirection switch
+			return view.GetEffectiveFlowDirection() switch
 			{
 				FlowDirection.MatchParent => ALayoutDirection.Inherit,
 				FlowDirection.LeftToRight => ALayoutDirection.Ltr,

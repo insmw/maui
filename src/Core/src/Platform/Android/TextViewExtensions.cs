@@ -98,7 +98,7 @@ namespace Microsoft.Maui.Platform
 
 		public static void UpdateFlowDirection(this TextView platformView, IView view)
 		{
-			switch (view.FlowDirection)
+			switch (view.GetEffectiveFlowDirection())
 			{
 				case FlowDirection.MatchParent:
 					platformView.LayoutDirection = ALayoutDirection.Inherit;

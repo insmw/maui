@@ -21,3 +21,4 @@ Microsoft.Maui.WeakEventManager.HandleEvent(object? sender, object? args, string
 static Microsoft.Maui.SizeRequest.operator !=(Microsoft.Maui.SizeRequest left, Microsoft.Maui.SizeRequest right) -> bool
 static Microsoft.Maui.SizeRequest.operator ==(Microsoft.Maui.SizeRequest left, Microsoft.Maui.SizeRequest right) -> bool
 *REMOVED*Microsoft.Maui.Platform.MauiWebView.MauiWebView() -> void
+static Microsoft.Maui.ViewExtensions.GetEffectiveFlowDirection(this Microsoft.Maui.IView! view) -> Microsoft.Maui.FlowDirection
