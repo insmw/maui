@@ -118,7 +118,7 @@ namespace Microsoft.Maui.Controls
 
 		internal void AddLogicalChild(Element element)
 		{
-			if (element == null)
+			if (element is null)
 			{
 				return;
 			}
@@ -134,7 +134,7 @@ namespace Microsoft.Maui.Controls
 
 		internal void RemoveLogicalChild(Element element)
 		{
-			if (element == null)
+			if (element is null)
 			{
 				return;
 			}
