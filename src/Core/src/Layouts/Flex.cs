@@ -900,7 +900,7 @@ namespace Microsoft.Maui.Layouts.Flex
 					Item child = layout.child_at(item, i);
 					if (!child.IsVisible)
 						continue;
-					
+
 					if (child.Position == Position.Absolute)
 					{
 						// Not helpful for this
