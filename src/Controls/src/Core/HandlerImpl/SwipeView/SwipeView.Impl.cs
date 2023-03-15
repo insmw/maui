@@ -132,31 +132,33 @@ namespace Microsoft.Maui.Controls
 			VisualDiagnostics.OnChildAdded(this, element);
 		}
 
-		internal void RemoveLogicalChild(Element element)
+		internal void ClearLogicalChildren()
 		{
+			// Reverse for-loop, so children can be removed while iterating
+			for (int i = _logicalChildren.Count - 1; i >= 0; i--)
+			{
+				RemoveLogicalChildByIndex(i);
+			}
+		}
+		
+		void RemoveLogicalChildByIndex(int index)
+		{
+			if (_logicalChildren.Count < index)
+			{
+				return;
+			}
+
+			var element = _logicalChildren[index];
+
 			if (element is null)
 			{
 				return;
 			}
 
 			element.Parent = null;
-
-			if (!_logicalChildren.Contains(element))
-				return;
-
-			var oldLogicalIndex = _logicalChildren.IndexOf(element);
 			_logicalChildren.Remove(element);
-			OnChildRemoved(element, oldLogicalIndex);
-			VisualDiagnostics.OnChildRemoved(this, element, oldLogicalIndex);
-		}
-
-		internal void ClearLogicalChildren()
-		{
-			// Reverse for-loop, so children can be removed while iterating
-			for (int i = _logicalChildren.Count - 1; i >= 0; i--)
-			{
-				RemoveLogicalChild(_logicalChildren[i]);
-			}
+			OnChildRemoved(element, index);
+			VisualDiagnostics.OnChildRemoved(this, element, index);
 		}
 
 		void OnParentScrolled(object? sender, ScrolledEventArgs e)
