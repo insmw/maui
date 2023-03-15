@@ -140,7 +140,7 @@ namespace Microsoft.Maui.Controls
 				RemoveLogicalChildByIndex(i);
 			}
 		}
-		
+
 		void RemoveLogicalChildByIndex(int index)
 		{
 			if (_logicalChildren.Count < index)
