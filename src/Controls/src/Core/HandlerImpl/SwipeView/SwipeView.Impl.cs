@@ -156,7 +156,7 @@ namespace Microsoft.Maui.Controls
 			}
 
 			element.Parent = null;
-			_logicalChildren.Remove(element);
+			_logicalChildren.RemoveAt(index);
 			OnChildRemoved(element, index);
 			VisualDiagnostics.OnChildRemoved(this, element, index);
 		}
