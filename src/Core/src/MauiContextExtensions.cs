@@ -75,5 +75,18 @@ namespace Microsoft.Maui
 			foreach (var service in scopedServices)
 				service.Initialize(scopedContext.Services);
 		}
+
+		public static FlowDirection GetFlowDirection(this IMauiContext mauiContext)
+		{
+			if(mauiContext is null)
+				return FlowDirection.LeftToRight;
+
+			var appInfo = AppInfo.Current;
+
+			if (appInfo.RequestedLayoutDirection == LayoutDirection.RightToLeft)
+				return FlowDirection.RightToLeft;
+
+			return FlowDirection.LeftToRight;
+		}
 	}
 }
