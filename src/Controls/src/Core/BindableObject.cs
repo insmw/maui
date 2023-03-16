@@ -212,7 +212,7 @@ namespace Microsoft.Maui.Controls
 			{
 				if (properties.TryGetValue(propArray[i], out var context))
 				{
-					resultArray[i].IsSet = (context.Attributes & BindableContextAttributes.IsDefaultValue) == 0;
+					resultArray[i].IsSet = context.Values.LastOrDefault().Key.CompareTo(SetterSpecificity.DefaultValue) == 0;
 					resultArray[i].Value = (T)context.Values.LastOrDefault().Value;
 				}
 				else
@@ -229,8 +229,7 @@ namespace Microsoft.Maui.Controls
 		public bool IsSet(BindableProperty targetProperty)
 		{
 			var bpcontext = GetContext(targetProperty ?? throw new ArgumentNullException(nameof(targetProperty)));
-			return bpcontext != null
-				&& (bpcontext.Attributes & BindableContextAttributes.IsDefaultValue) == 0;
+			return bpcontext != null && bpcontext.Values.LastOrDefault().Key.CompareTo(SetterSpecificity.DefaultValue) != 0;
 		}
 
 
@@ -276,6 +275,8 @@ namespace Microsoft.Maui.Controls
 			targetProperty.BindingChanging?.Invoke(this, oldBinding, binding);
 
 			binding.Apply(BindingContext, this, targetProperty);
+			
+
 		}
 
 		/// <include file="../../docs/Microsoft.Maui.Controls/BindableObject.xml" path="//Member[@MemberName='SetInheritedBindingContext']/Docs/*" />
@@ -378,8 +379,10 @@ namespace Microsoft.Maui.Controls
 				return true;
 			if ((context.Attributes & BindableContextAttributes.IsSetFromStyle) == BindableContextAttributes.IsSetFromStyle)
 				return true;
-			if ((context.Attributes & BindableContextAttributes.IsDefaultValue) == BindableContextAttributes.IsDefaultValue)
+			if (context.Values.LastOrDefault().Key.CompareTo(SetterSpecificity.DefaultValue) == 0)
 				return true;
+			//if ((context.Attributes & BindableContextAttributes.IsDefaultValue) == BindableContextAttributes.IsDefaultValue)
+			//	return true;
 			if ((context.Attributes & BindableContextAttributes.IsDefaultValueCreated) == BindableContextAttributes.IsDefaultValueCreated)
 				return true;
 			return false;
@@ -504,7 +507,7 @@ namespace Microsoft.Maui.Controls
 			//bool checkAccess = (privateAttributes & SetValuePrivateFlags.CheckAccess) != 0;
 			//bool manuallySet = (privateAttributes & SetValuePrivateFlags.ManuallySet) != 0;
 			bool silent = (privateAttributes & SetValuePrivateFlags.Silent) != 0;
-			bool fromStyle = (privateAttributes & SetValuePrivateFlags.FromStyle) != 0;
+			//bool fromStyle = (privateAttributes & SetValuePrivateFlags.FromStyle) != 0;
 			bool converted = (privateAttributes & SetValuePrivateFlags.Converted) != 0;
 
 			if (!converted && !property.TryConvert(ref value))
@@ -531,14 +534,14 @@ namespace Microsoft.Maui.Controls
 			//else
 			//	context.Attributes &= ~BindableContextAttributes.IsManuallySet;
 
-			if (fromStyle)
-				context.Attributes |= BindableContextAttributes.IsSetFromStyle;
+			//if (fromStyle)
+			//	context.Attributes |= BindableContextAttributes.IsSetFromStyle;
 			// else omitted on purpose
 
 			//if we're updating a dynamic resource from style, set the default backup value
-			if ((context.Attributes & (BindableContextAttributes.IsDynamicResource | BindableContextAttributes.IsSetFromStyle)) != 0
-				&& (attributes & SetValueFlags.ClearDynamicResource) == 0)
-				SetBackupStyleValue(property, value);
+			//if ((context.Attributes & (BindableContextAttributes.IsDynamicResource | BindableContextAttributes.IsSetFromStyle)) != 0
+			//	&& (attributes & SetValueFlags.ClearDynamicResource) == 0)
+			//	SetBackupStyleValue(property, value);
 
 			bool currentlyApplying = _applying;
 
@@ -553,7 +556,7 @@ namespace Microsoft.Maui.Controls
 			else
 			{
 				context.Attributes |= BindableContextAttributes.IsBeingSet;
-				SetValueActual(property, context, value, currentlyApplying, attributes, silent);
+				SetValueActual(property, context, value, currentlyApplying, attributes, specificity, silent);
 
 				Queue<SetValueArgs> delayQueue = context.DelayedSetters;
 				if (delayQueue != null)
@@ -561,7 +564,7 @@ namespace Microsoft.Maui.Controls
 					while (delayQueue.Count > 0)
 					{
 						SetValueArgs s = delayQueue.Dequeue();
-						SetValueActual(s.Property, s.Context, s.Value, s.CurrentlyApplying, s.Attributes);
+						SetValueActual(s.Property, s.Context, s.Value, s.CurrentlyApplying, s.Attributes, specificity);
 					}
 
 					context.DelayedSetters = null;
@@ -571,28 +574,37 @@ namespace Microsoft.Maui.Controls
 			}
 		}
 
-		void SetValueActual(BindableProperty property, BindablePropertyContext context, object value, bool currentlyApplying, SetValueFlags attributes, bool silent = false)
+		void SetValueActual(BindableProperty property, BindablePropertyContext context, object value, bool currentlyApplying, SetValueFlags attributes, SetterSpecificity specificity, bool silent = false)
 		{
-			object original = context.Value;
+			object original = context.Values.LastOrDefault().Value;
+			var originalSpecificity = context.Values.LastOrDefault().Key;
+
+			context.Values[specificity] = value;
+
+			object updated = context.Values.LastOrDefault().Value;
+			var updatedSpecificity = context.Values.LastOrDefault().Key;
+
+
 			bool raiseOnEqual = (attributes & SetValueFlags.RaiseOnEqual) != 0;
+
 			bool clearDynamicResources = (attributes & SetValueFlags.ClearDynamicResource) != 0;
 			bool clearOneWayBindings = (attributes & SetValueFlags.ClearOneWayBindings) != 0;
 			bool clearTwoWayBindings = (attributes & SetValueFlags.ClearTwoWayBindings) != 0;
 
-			bool same = ReferenceEquals(context.Property, BindingContextProperty) ? ReferenceEquals(value, original) : Equals(value, original);
-			if (!silent && (!same || raiseOnEqual))
+			bool sameValue = ReferenceEquals(context.Property, BindingContextProperty) ? ReferenceEquals(updated, original) : Equals(updated, original);
+			if (!silent && (!sameValue || raiseOnEqual))
 			{
-				property.PropertyChanging?.Invoke(this, original, value);
+				property.PropertyChanging?.Invoke(this, original, updated);
 
 				OnPropertyChanging(property.PropertyName);
 			}
 
-			if (!same || raiseOnEqual)
-			{
-				context.Value = value;
-			}
+			//if (!sameValue || raiseOnEqual)
+			//{
+			//	context.Value = value;
+			//}
 
-			context.Attributes &= ~BindableContextAttributes.IsDefaultValue;
+			//context.Attributes &= ~BindableContextAttributes.IsDefaultValue;
 			context.Attributes &= ~BindableContextAttributes.IsDefaultValueCreated;
 
 			if ((context.Attributes & BindableContextAttributes.IsDynamicResource) != 0 && clearDynamicResources)
@@ -608,7 +620,7 @@ namespace Microsoft.Maui.Controls
 				}
 			}
 
-			if (!silent && (!same || raiseOnEqual))
+			if (!silent && (!sameValue || raiseOnEqual))
 			{
 				if (binding != null && !currentlyApplying)
 				{
@@ -667,9 +679,7 @@ namespace Microsoft.Maui.Controls
 			var context = new BindablePropertyContext { Property = property };
 			context.Values.Add(SetterSpecificity.DefaultValue, defaultValueCreator != null ? defaultValueCreator(this) : property.DefaultValue);
 
-			if (defaultValueCreator == null)
-				context.Attributes = BindableContextAttributes.IsDefaultValue;
-			else
+			if (defaultValueCreator != null)			
 				context.Attributes = BindableContextAttributes.IsDefaultValueCreated;
 
 			_properties.Add(property, context);
@@ -730,7 +740,7 @@ namespace Microsoft.Maui.Controls
 			IsBeingSet = 1 << 1,
 			IsDynamicResource = 1 << 2,
 			IsSetFromStyle = 1 << 3,
-			IsDefaultValue = 1 << 4,
+			//IsDefaultValue = 1 << 4,
 			IsDefaultValueCreated = 1 << 5,
 		}
 
