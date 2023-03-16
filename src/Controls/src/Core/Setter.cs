@@ -134,6 +134,7 @@ namespace Microsoft.Maui.Controls
 
 	internal readonly struct SetterSpecificity : IComparable<SetterSpecificity>
 	{
+		public static readonly SetterSpecificity DefaultValue = new(-1, 0, 0, 0, 0, 0, 0);
 		public static readonly SetterSpecificity FromHandler = new SetterSpecificity();
 		public static readonly SetterSpecificity VisualStateSetter = new SetterSpecificity(1, 0, 0, 0, 0, 0, 0);
 		public static readonly SetterSpecificity ManualValueSetter = new SetterSpecificity(0, 1, 0, 0, 0, 0, 0);
