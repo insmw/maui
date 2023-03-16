@@ -78,7 +78,7 @@ namespace Microsoft.Maui
 
 		public static FlowDirection GetFlowDirection(this IMauiContext mauiContext)
 		{
-			if(mauiContext is null)
+			if (mauiContext is null)
 				return FlowDirection.LeftToRight;
 
 			var appInfo = AppInfo.Current;
