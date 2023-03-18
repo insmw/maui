@@ -2,7 +2,7 @@
 using System;
 using Microsoft.Maui.Graphics;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// Optional setting to open the browser with.

@@ -1,7 +1,7 @@
 using AppKit;
 using Foundation;
 
-namespace Microsoft.Maui.ApplicationModel.Communication
+namespace Microsoft.Maui.Patched.ApplicationModel.Communication
 {
 	partial class PhoneDialerImplementation : IPhoneDialer
 	{

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.UI.Xaml;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	class WindowMessageManager : IDisposable
 	{

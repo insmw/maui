@@ -4,12 +4,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Devices;
+using Microsoft.Maui.Patched.ApplicationModel;
+using Microsoft.Maui.Patched.Devices;
 using Tizen;
 using Tizen.Applications;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	partial class FilePickerImplementation : IFilePicker
 	{

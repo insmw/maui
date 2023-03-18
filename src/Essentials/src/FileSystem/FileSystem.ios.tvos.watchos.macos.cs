@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Foundation;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	partial class FileSystemImplementation : IFileSystem
 	{

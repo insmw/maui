@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Foundation;
 using ObjCRuntime;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	class DeviceInfoImplementation : IDeviceInfo
 	{

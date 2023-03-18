@@ -7,9 +7,9 @@ using Android.Content;
 using Android.Graphics;
 using Android.Views;
 using Java.Nio;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 
-namespace Microsoft.Maui.Media
+namespace Microsoft.Maui.Patched.Media
 {
 	partial class ScreenshotImplementation : IPlatformScreenshot, IScreenshot
 	{

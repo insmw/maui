@@ -1,6 +1,6 @@
 ﻿#nullable enable
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	/// <summary>
 	/// The HapticFeedback API lets you control haptic feedback on the device.

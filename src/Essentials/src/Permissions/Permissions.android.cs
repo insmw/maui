@@ -9,7 +9,7 @@ using Android.OS;
 using AndroidX.Core.App;
 using AndroidX.Core.Content;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	public static partial class Permissions
 	{

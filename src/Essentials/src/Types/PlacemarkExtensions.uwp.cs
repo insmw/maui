@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.Services.Maps;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	static partial class LocationExtensions
 	{

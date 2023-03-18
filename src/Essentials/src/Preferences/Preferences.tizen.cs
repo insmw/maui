@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Tizen.Applications;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	class PreferencesImplementation : IPreferences
 	{

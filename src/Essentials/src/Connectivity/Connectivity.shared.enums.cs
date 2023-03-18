@@ -1,4 +1,4 @@
-namespace Microsoft.Maui.Networking
+namespace Microsoft.Maui.Patched.Networking
 {
 	/// <summary>
 	/// Describes the type of connection the device is using.

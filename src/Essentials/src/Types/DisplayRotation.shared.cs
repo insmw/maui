@@ -1,4 +1,4 @@
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	/// <summary>
 	/// Represents the rotation a device display can have.

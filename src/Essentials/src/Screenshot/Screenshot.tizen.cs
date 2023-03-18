@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 using NView = Tizen.NUI.BaseComponents.View;
 using Window = Tizen.NUI.Window;
 
-namespace Microsoft.Maui.Media
+namespace Microsoft.Maui.Patched.Media
 {
 	// TODO: Need to impl
 	partial class ScreenshotImplementation : IPlatformScreenshot, IScreenshot

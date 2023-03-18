@@ -3,7 +3,7 @@ using System;
 using Foundation;
 using UIKit;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	partial class DeviceDisplayImplementation : IDeviceDisplay
 	{

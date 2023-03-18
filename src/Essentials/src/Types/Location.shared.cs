@@ -1,7 +1,7 @@
 using System;
-using Microsoft.Maui.Media;
+using Microsoft.Maui.Patched.Media;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	/// <summary>Distance unit for use in conversion.</summary>
 	public enum DistanceUnits

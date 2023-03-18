@@ -6,10 +6,10 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Provider;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.Storage;
 using AndroidUri = Android.Net.Uri;
 
-namespace Microsoft.Maui.ApplicationModel.Communication
+namespace Microsoft.Maui.Patched.ApplicationModel.Communication
 {
 	partial class SmsImplementation : ISms
 	{

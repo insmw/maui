@@ -6,7 +6,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
 using WinRT;
 
-namespace Microsoft.Maui.ApplicationModel.DataTransfer
+namespace Microsoft.Maui.Patched.ApplicationModel.DataTransfer
 {
 	partial class ShareImplementation : IShare
 	{

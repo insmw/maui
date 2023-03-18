@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.ApplicationModel;
+using Microsoft.Maui.Patched.Storage;
 using Windows.Security.Authentication.Web;
 
-namespace Microsoft.Maui.Authentication
+namespace Microsoft.Maui.Patched.Authentication
 {
 	partial class WebAuthenticatorImplementation : IWebAuthenticator
 	{

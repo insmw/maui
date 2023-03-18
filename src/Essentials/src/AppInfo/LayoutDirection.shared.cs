@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// Enumerates possible layout directions.

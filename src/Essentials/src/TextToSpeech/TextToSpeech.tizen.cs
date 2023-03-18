@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Tizen.Uix.Tts;
 
-namespace Microsoft.Maui.Media
+namespace Microsoft.Maui.Patched.Media
 {
 	partial class TextToSpeechImplementation : ITextToSpeech
 	{

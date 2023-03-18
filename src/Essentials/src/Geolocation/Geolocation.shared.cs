@@ -2,9 +2,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	/// <summary>
 	/// Provides a way to get the current location of the device.

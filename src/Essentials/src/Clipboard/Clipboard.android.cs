@@ -4,7 +4,7 @@ using Android.App;
 using Android.Content;
 using static Android.Content.ClipboardManager;
 
-namespace Microsoft.Maui.ApplicationModel.DataTransfer
+namespace Microsoft.Maui.Patched.ApplicationModel.DataTransfer
 {
 	partial class ClipboardImplementation : IClipboard
 	{

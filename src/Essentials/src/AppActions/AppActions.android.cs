@@ -9,7 +9,7 @@ using Android.Content.PM;
 using Android.Graphics.Drawables;
 using Android.Runtime;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	class AppActionsImplementation : IAppActions, IPlatformAppActions
 	{

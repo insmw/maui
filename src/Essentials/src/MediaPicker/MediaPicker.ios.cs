@@ -2,14 +2,14 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Devices;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.ApplicationModel;
+using Microsoft.Maui.Patched.Devices;
+using Microsoft.Maui.Patched.Storage;
 using MobileCoreServices;
 using Photos;
 using UIKit;
 
-namespace Microsoft.Maui.Media
+namespace Microsoft.Maui.Patched.Media
 {
 	partial class MediaPickerImplementation : IMediaPicker
 	{

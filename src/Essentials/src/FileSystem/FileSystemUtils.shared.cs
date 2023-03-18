@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System.IO;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	static partial class FileSystemUtils
 	{

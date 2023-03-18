@@ -1,6 +1,6 @@
 #nullable enable
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	partial class DeviceDisplayImplementation
 	{

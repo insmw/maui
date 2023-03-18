@@ -1,9 +1,9 @@
 #nullable enable
 using System;
 using System.Numerics;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	/// <summary>
 	/// The OrientationSensor API lets you monitor the orientation of a device in three dimensional space.

@@ -1,9 +1,9 @@
-﻿using Microsoft.Maui.ApplicationModel;
+﻿using Microsoft.Maui.Patched.ApplicationModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Automation.Peers;
 using Microsoft.UI.Xaml.Media;
 
-namespace Microsoft.Maui.Accessibility
+namespace Microsoft.Maui.Patched.Accessibility
 {
 	partial class SemanticScreenReaderImplementation : ISemanticScreenReader
 	{

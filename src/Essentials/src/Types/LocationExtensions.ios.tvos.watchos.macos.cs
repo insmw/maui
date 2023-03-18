@@ -4,7 +4,7 @@ using System.Linq;
 using CoreLocation;
 using Foundation;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	static partial class LocationExtensions
 	{

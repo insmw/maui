@@ -4,7 +4,7 @@ using AppKit;
 using CoreVideo;
 using Foundation;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	class DeviceDisplayImplementation : IDeviceDisplay
 	{

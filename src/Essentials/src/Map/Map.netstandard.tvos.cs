@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Microsoft.Maui.Devices.Sensors;
+using Microsoft.Maui.Patched.Devices.Sensors;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	class MapImplementation : IMap
 	{

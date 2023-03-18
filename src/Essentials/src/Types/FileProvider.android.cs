@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 using AndroidEnvironment = Android.OS.Environment;
 using AndroidUri = Android.Net.Uri;
 using ContentFileProvider = AndroidX.Core.Content.FileProvider;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	[ContentProvider(
 		new[] { "${applicationId}.fileProvider" },
-		Name = "microsoft.maui.essentials.fileProvider",
+		Name = "Microsoft.Maui.Patched.essentials.fileProvider",
 		Exported = false,
 		GrantUriPermissions = true)]
 	[MetaData(

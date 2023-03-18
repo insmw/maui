@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.Storage;
 
-namespace Microsoft.Maui.ApplicationModel.DataTransfer
+namespace Microsoft.Maui.Patched.ApplicationModel.DataTransfer
 {
 	partial class ShareImplementation : IShare
 	{

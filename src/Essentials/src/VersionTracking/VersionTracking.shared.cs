@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.Storage;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// The VersionTracking API provides an easy way to track an app's version on a device.

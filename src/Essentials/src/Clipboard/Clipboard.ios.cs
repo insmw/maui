@@ -5,7 +5,7 @@ using Foundation;
 using ObjCRuntime;
 using UIKit;
 
-namespace Microsoft.Maui.ApplicationModel.DataTransfer
+namespace Microsoft.Maui.Patched.ApplicationModel.DataTransfer
 {
 	partial class ClipboardImplementation : IClipboard
 	{

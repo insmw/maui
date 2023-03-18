@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Microsoft.Maui.Essentials.DeviceTests")]
-[assembly: InternalsVisibleTo("Microsoft.Maui.Essentials.UnitTests")]
+[assembly: InternalsVisibleTo("Microsoft.Maui.Patched.Essentials.DeviceTests")]
+[assembly: InternalsVisibleTo("Microsoft.Maui.Patched.Essentials.UnitTests")]
 [assembly: InternalsVisibleTo("EssentialsTests")]
 [assembly: InternalsVisibleTo("EssentialsDeviceTestsAndroid")]
 [assembly: InternalsVisibleTo("EssentialsDeviceTestsUWP")]
@@ -12,8 +12,8 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("CommunityToolkit.Maui.UnitTests")]
 [assembly: InternalsVisibleTo("CommunityToolkit.Maui.Markup")]
 [assembly: InternalsVisibleTo("CommunityToolkit.Maui.Markup.UnitTests")]
-[assembly: InternalsVisibleTo("Microsoft.Maui.Controls.Core.UnitTests")]
-[assembly: InternalsVisibleTo("Microsoft.Maui.Controls.Xaml.UnitTests")]
-[assembly: InternalsVisibleTo("Microsoft.Maui.TestUtils")]
-[assembly: InternalsVisibleTo("Microsoft.Maui.TestUtils.DeviceTests")]
-[assembly: InternalsVisibleTo("Microsoft.Maui.TestUtils.DeviceTests.Runners")]
+[assembly: InternalsVisibleTo("Microsoft.Maui.Patched.Controls.Core.UnitTests")]
+[assembly: InternalsVisibleTo("Microsoft.Maui.Patched.Controls.Xaml.UnitTests")]
+[assembly: InternalsVisibleTo("Microsoft.Maui.Patched.TestUtils")]
+[assembly: InternalsVisibleTo("Microsoft.Maui.Patched.TestUtils.DeviceTests")]
+[assembly: InternalsVisibleTo("Microsoft.Maui.Patched.TestUtils.DeviceTests.Runners")]

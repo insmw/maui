@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	/// <summary>
 	/// The SecureStorage API helps securely store simple key/value pairs.
@@ -69,10 +69,10 @@ namespace Microsoft.Maui.Storage
 	///     <term>iOS</term><description>Data is stored in KeyChain. Additional information on SecAccessible at: <see cref="T:Security.SecAccessible" />.</description>
 	///   </item>
 	///   <item>
-	///     <term>Android</term><description>Encryption keys are stored in KeyStore and encrypted data is stored in a named shared preference container (PackageId.microsoft.maui.essentials.preferences).</description>
+	///     <term>Android</term><description>Encryption keys are stored in KeyStore and encrypted data is stored in a named shared preference container (PackageId.Microsoft.Maui.Patched.essentials.preferences).</description>
 	///   </item>
 	///   <item>
-	///     <term>Windows</term><description>Data is encrypted with DataProtectionProvider and stored in a named ApplicationDataContainer (with a container name of ApplicationId.microsoft.maui.essentials.preferences).</description>
+	///     <term>Windows</term><description>Data is encrypted with DataProtectionProvider and stored in a named ApplicationDataContainer (with a container name of ApplicationId.Microsoft.Maui.Patched.essentials.preferences).</description>
 	///   </item>
 	/// </list>
 	/// <para>NOTE: On Android devices running below API 23 (6.0 Marshmallow) there is no AES available in KeyStore.  As a best practice this API will generate an RSA/ECB/PKCS7Padding key pair stored in KeyStore (the only type supported in KeyStore by these lower API levels), which is used to wrap an AES key generated at runtime.  This wrapped key is stored in Preferences.</para>

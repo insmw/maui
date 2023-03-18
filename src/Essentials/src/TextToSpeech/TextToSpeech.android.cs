@@ -6,12 +6,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Speech.Tts;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 using AndroidTextToSpeech = Android.Speech.Tts.TextToSpeech;
 using Debug = System.Diagnostics.Debug;
 using JavaLocale = Java.Util.Locale;
 
-namespace Microsoft.Maui.Media
+namespace Microsoft.Maui.Patched.Media
 {
 	partial class TextToSpeechImplementation : ITextToSpeech
 	{

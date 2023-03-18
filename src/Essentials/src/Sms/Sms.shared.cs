@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Microsoft.Maui.ApplicationModel.Communication
+namespace Microsoft.Maui.Patched.ApplicationModel.Communication
 {
 	/// <summary>
 	/// The SMS API enables an application to open the default SMS application with a specified message to send to a recipient.

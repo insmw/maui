@@ -6,7 +6,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// Represents a manager object that can handle <see cref="Activity"/> states.

@@ -1,7 +1,7 @@
 #nullable enable
 using System;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	/// <summary>
 	/// Represents information about the device screen.

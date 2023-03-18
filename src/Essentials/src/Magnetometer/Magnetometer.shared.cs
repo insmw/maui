@@ -1,12 +1,12 @@
 #nullable enable
 using System;
 using System.Numerics;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	/// <summary>
-	/// Detect device's orentation relative to Earth's magnetic field in microteslas (µ).
+	/// Detect device's orentation relative to Earth's magnetic field in microteslas (?.
 	/// </summary>
 	public interface IMagnetometer
 	{
@@ -38,7 +38,7 @@ namespace Microsoft.Maui.Devices.Sensors
 	}
 
 	/// <summary>
-	/// Detect device's orentation relative to Earth's magnetic field in microteslas (µ).
+	/// Detect device's orentation relative to Earth's magnetic field in microteslas (?.
 	/// </summary>
 	public static partial class Magnetometer
 	{
@@ -138,7 +138,7 @@ namespace Microsoft.Maui.Devices.Sensors
 			MagneticField = new Vector3(x, y, z);
 
 		/// <summary>
-		/// Gets the magnetic field vector in microteslas (µ).
+		/// Gets the magnetic field vector in microteslas (?.
 		/// </summary>
 		public Vector3 MagneticField { get; }
 

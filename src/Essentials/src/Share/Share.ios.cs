@@ -7,7 +7,7 @@ using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Graphics.Platform;
 using UIKit;
 
-namespace Microsoft.Maui.ApplicationModel.DataTransfer
+namespace Microsoft.Maui.Patched.ApplicationModel.DataTransfer
 {
 	partial class ShareImplementation : IShare
 	{

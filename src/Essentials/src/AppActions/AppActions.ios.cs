@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Foundation;
 using UIKit;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	partial class AppActionsImplementation : IAppActions, IPlatformAppActions
 	{

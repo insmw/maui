@@ -3,7 +3,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 
-namespace Microsoft.Maui.Authentication
+namespace Microsoft.Maui.Patched.Authentication
 {
 	[Activity(ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize, Exported = true)]
 	class WebAuthenticatorIntermediateActivity : Activity

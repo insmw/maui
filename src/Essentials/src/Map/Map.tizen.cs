@@ -2,10 +2,10 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Maui.Devices.Sensors;
+using Microsoft.Maui.Patched.Devices.Sensors;
 using Tizen.Applications;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	class MapImplementation : IMap
 	{

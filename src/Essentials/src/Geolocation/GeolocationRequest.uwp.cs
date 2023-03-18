@@ -1,6 +1,6 @@
 #nullable enable
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	public partial class GeolocationRequest
 	{

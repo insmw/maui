@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Windows.Networking.Connectivity;
 
-namespace Microsoft.Maui.Networking
+namespace Microsoft.Maui.Patched.Networking
 {
 	partial class ConnectivityImplementation : IConnectivity
 	{

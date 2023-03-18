@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.Maui.ApplicationModel.Communication
+namespace Microsoft.Maui.Patched.ApplicationModel.Communication
 {
 	/// <summary>
 	/// Represents a contact on the user's device.

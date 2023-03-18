@@ -1,9 +1,9 @@
 using System;
 using CoreMotion;
 using Foundation;
-using Microsoft.Maui.Media;
+using Microsoft.Maui.Patched.Media;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	partial class BarometerImplementation : IBarometer
 	{

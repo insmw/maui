@@ -8,11 +8,11 @@ using Android.App;
 using Android.Content;
 using Android.Locations;
 using Android.OS;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 using AndroidLocation = Android.Locations.Location;
 using LocationPower = Android.Locations.Power;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	partial class GeolocationImplementation : IGeolocation
 	{

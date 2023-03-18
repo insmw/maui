@@ -7,7 +7,7 @@ using Foundation;
 using Photos;
 using UIKit;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	static partial class FileSystemUtils
 	{

@@ -1,7 +1,7 @@
 #nullable enable
 using System;
 
-namespace Microsoft.Maui.ApplicationModel.Communication
+namespace Microsoft.Maui.Patched.ApplicationModel.Communication
 {
 	/// <summary>
 	/// The PhoneDialer API enables an application to open a phone number in the dialer.

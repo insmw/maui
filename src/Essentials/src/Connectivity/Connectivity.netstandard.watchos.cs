@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 
-namespace Microsoft.Maui.Networking
+namespace Microsoft.Maui.Patched.Networking
 {
 	partial class ConnectivityImplementation : IConnectivity
 	{

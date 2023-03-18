@@ -9,7 +9,7 @@ using Android.Provider;
 using CommonDataKinds = Android.Provider.ContactsContract.CommonDataKinds;
 using StructuredName = Android.Provider.ContactsContract.CommonDataKinds.StructuredName;
 
-namespace Microsoft.Maui.ApplicationModel.Communication
+namespace Microsoft.Maui.Patched.ApplicationModel.Communication
 {
 	class ContactsImplementation : IContacts
 	{

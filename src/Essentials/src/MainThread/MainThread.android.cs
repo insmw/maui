@@ -1,7 +1,7 @@
 using System;
 using Android.OS;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	public static partial class MainThread
 	{

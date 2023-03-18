@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Networking;
+using Microsoft.Maui.Patched.ApplicationModel;
+using Microsoft.Maui.Patched.Networking;
 
-namespace Microsoft.Maui.Networking
+namespace Microsoft.Maui.Patched.Networking
 {
 	/// <summary>
 	/// The Connectivity API lets you monitor for changes in the device's network conditions, check the current network access, and determine how it is currently connected.

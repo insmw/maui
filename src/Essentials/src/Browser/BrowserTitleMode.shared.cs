@@ -1,5 +1,5 @@
 #nullable enable
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// Mode for the in-app browser title.

@@ -11,10 +11,10 @@ using SafariServices;
 using ObjCRuntime;
 using UIKit;
 using WebKit;
-using Microsoft.Maui.Authentication;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.Authentication;
+using Microsoft.Maui.Patched.ApplicationModel;
 
-namespace Microsoft.Maui.Authentication
+namespace Microsoft.Maui.Patched.Authentication
 {
 	partial class WebAuthenticatorImplementation : IWebAuthenticator, IPlatformWebAuthenticatorCallback
 	{

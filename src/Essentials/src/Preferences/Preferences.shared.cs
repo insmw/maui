@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	/// <summary>
 	/// The Preferences API helps to store application preferences in a key/value store.
@@ -241,7 +241,7 @@ namespace Microsoft.Maui.Storage
 		static IPreferences Current => Storage.Preferences.Default;
 
 		internal static string GetPrivatePreferencesSharedName(string feature) =>
-			$"{ApplicationModel.AppInfo.Current.PackageName}.microsoft.maui.essentials.{feature}";
+			$"{ApplicationModel.AppInfo.Current.PackageName}.Microsoft.Maui.Patched.essentials.{feature}";
 
 		static IPreferences? defaultImplementation;
 

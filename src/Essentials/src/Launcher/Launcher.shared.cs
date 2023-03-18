@@ -2,9 +2,9 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.Storage;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// The Launcher API enables an application to open a URI by the system.

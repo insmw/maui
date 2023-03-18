@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Maui.Devices;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.Devices;
+using Microsoft.Maui.Patched.Storage;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	/// <summary>
 	/// Lets the user pick a file from the device's storage.

@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.Storage;
 using Tizen.Applications;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	partial class LauncherImplementation
 	{

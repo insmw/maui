@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Haptics;
 using Windows.Foundation.Metadata;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	partial class HapticFeedbackImplementation : IHapticFeedback
 	{

@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using AppKit;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	partial class HapticFeedbackImplementation : IHapticFeedback
 	{

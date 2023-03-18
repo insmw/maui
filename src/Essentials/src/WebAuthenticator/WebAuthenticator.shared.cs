@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.Maui.Authentication
+namespace Microsoft.Maui.Patched.Authentication
 {
 	/// <summary>
 	/// A web navigation API intended to be used for authentication with external web services such as OAuth.

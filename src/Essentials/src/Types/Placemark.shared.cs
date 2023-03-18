@@ -1,6 +1,6 @@
 using System;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	/// <summary>
 	/// Represents a user-friendly description of a geographic coordinate. This contains information such as the name of the place, its address, and other information.

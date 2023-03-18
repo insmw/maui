@@ -4,7 +4,7 @@ using AppKit;
 using AuthenticationServices;
 using Foundation;
 
-namespace Microsoft.Maui.Authentication
+namespace Microsoft.Maui.Patched.Authentication
 {
 	partial class WebAuthenticatorImplementation : IWebAuthenticator, IPlatformWebAuthenticatorCallback
 	{

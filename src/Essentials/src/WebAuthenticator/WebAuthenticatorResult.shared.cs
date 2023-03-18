@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 
-namespace Microsoft.Maui.Authentication
+namespace Microsoft.Maui.Patched.Authentication
 {
 	/// <summary>
 	/// Represents a Web Authenticator Result object parsed from the callback Url.

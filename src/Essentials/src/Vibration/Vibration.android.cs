@@ -4,10 +4,10 @@ using Android.App;
 using Android.Content;
 #if __ANDROID_26__
 using Android.OS;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 #endif
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	partial class VibrationImplementation : IVibration
 	{

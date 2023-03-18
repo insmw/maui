@@ -5,7 +5,7 @@ using System.Reflection;
 using Microsoft.UI.Xaml;
 using Windows.ApplicationModel;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	class AppInfoImplementation : IAppInfo
 	{
@@ -144,7 +144,7 @@ namespace Microsoft.Maui.ApplicationModel
 		/// <param name="name">The key of the metadata to be retrieved (e.g. PackageName, PublisherName or Name).</param>
 		/// <returns>The value that corresponds to the given key in <paramref name="name"/>.</returns>
 		public static string GetAppInfoValue(this Assembly assembly, string name) =>
-			assembly.GetMetadataAttributeValue("Microsoft.Maui.ApplicationModel.AppInfo." + name);
+			assembly.GetMetadataAttributeValue("Microsoft.Maui.Patched.ApplicationModel.AppInfo." + name);
 
 		/// <summary>
 		/// Gets the value for a given key from the assembly metadata.

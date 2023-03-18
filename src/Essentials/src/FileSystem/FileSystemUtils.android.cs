@@ -4,10 +4,10 @@ using System.IO;
 using Android.App;
 using Android.Provider;
 using Android.Webkit;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 using AndroidUri = Android.Net.Uri;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	static partial class FileSystemUtils
 	{

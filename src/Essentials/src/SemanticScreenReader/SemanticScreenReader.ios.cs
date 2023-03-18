@@ -2,7 +2,7 @@
 using ObjCRuntime;
 using UIKit;
 
-namespace Microsoft.Maui.Accessibility
+namespace Microsoft.Maui.Patched.Accessibility
 {
 	partial class SemanticScreenReaderImplementation : ISemanticScreenReader
 	{

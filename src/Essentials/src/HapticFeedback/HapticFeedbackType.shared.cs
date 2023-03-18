@@ -1,4 +1,4 @@
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	/// <summary>
 	/// Enumerates the possible types of <see cref="IHapticFeedback"/> response.

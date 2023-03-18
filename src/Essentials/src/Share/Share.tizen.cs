@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Tizen.Applications;
 
-namespace Microsoft.Maui.ApplicationModel.DataTransfer
+namespace Microsoft.Maui.Patched.ApplicationModel.DataTransfer
 {
 	partial class ShareImplementation : IShare
 	{

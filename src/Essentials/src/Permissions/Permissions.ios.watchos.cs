@@ -6,7 +6,7 @@ using CoreMotion;
 using EventKit;
 using Foundation;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	public static partial class Permissions
 	{

@@ -1,7 +1,7 @@
 #nullable enable
 using System.Threading.Tasks;
 
-namespace Microsoft.Maui.ApplicationModel.DataTransfer
+namespace Microsoft.Maui.Patched.ApplicationModel.DataTransfer
 {
 	partial class ClipboardImplementation : IClipboard
 	{

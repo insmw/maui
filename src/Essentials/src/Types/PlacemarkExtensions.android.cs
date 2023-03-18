@@ -3,7 +3,7 @@ using System.Linq;
 
 using AndroidAddress = Android.Locations.Address;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	static partial class PlacemarkExtensions
 	{

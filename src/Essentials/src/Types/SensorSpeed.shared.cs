@@ -1,4 +1,4 @@
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	/// <summary>
 	/// Represents the sensor speed to monitor device sensors for changes.

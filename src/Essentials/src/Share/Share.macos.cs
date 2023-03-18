@@ -4,7 +4,7 @@ using AppKit;
 using Foundation;
 using Microsoft.Maui.Graphics.Platform;
 
-namespace Microsoft.Maui.ApplicationModel.DataTransfer
+namespace Microsoft.Maui.Patched.ApplicationModel.DataTransfer
 {
 	partial class ShareImplementation : IShare
 	{

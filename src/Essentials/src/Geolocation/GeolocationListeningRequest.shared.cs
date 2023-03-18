@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	/// <summary>
 	/// Request options for listening to geolocations

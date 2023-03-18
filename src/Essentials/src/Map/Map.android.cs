@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Microsoft.Maui.Devices.Sensors;
+using Microsoft.Maui.Patched.Devices.Sensors;
 using AndroidUri = Android.Net.Uri;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	class MapImplementation : IMap
 	{

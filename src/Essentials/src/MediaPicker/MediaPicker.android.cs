@@ -4,11 +4,11 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Provider;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.ApplicationModel;
+using Microsoft.Maui.Patched.Storage;
 using AndroidUri = Android.Net.Uri;
 
-namespace Microsoft.Maui.Media
+namespace Microsoft.Maui.Patched.Media
 {
 	partial class MediaPickerImplementation : IMediaPicker
 	{

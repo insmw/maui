@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 using Tizen.Network.Connection;
 
-namespace Microsoft.Maui.Networking
+namespace Microsoft.Maui.Patched.Networking
 {
 	partial class ConnectivityImplementation : IConnectivity
 	{

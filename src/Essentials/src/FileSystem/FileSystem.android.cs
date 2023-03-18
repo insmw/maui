@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Webkit;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	partial class FileSystemImplementation : IFileSystem
 	{

@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using CoreLocation;
 using Foundation;
-using Microsoft.Maui.Devices.Sensors;
+using Microsoft.Maui.Patched.Devices.Sensors;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	public static partial class Permissions
 	{

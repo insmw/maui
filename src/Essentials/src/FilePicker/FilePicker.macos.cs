@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AppKit;
 using MobileCoreServices;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	partial class FilePickerImplementation : IFilePicker
 	{

@@ -1,10 +1,10 @@
 #nullable enable
 using System;
 using System.Threading.Tasks;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.ApplicationModel;
+using Microsoft.Maui.Patched.Storage;
 
-namespace Microsoft.Maui.Media
+namespace Microsoft.Maui.Patched.Media
 {
 	/// <summary>
 	/// The MediaPicker API lets a user pick or take a photo or video on the device.

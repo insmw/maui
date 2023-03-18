@@ -1,4 +1,4 @@
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// Represents various modes of navigation that can be passed to the operating system's Maps app.

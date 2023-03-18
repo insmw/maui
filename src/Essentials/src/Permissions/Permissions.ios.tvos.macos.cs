@@ -5,7 +5,7 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using Photos;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	public static partial class Permissions
 	{

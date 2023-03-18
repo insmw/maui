@@ -8,9 +8,9 @@ using Android.Content.Res;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	partial class DeviceDisplayImplementation
 	{

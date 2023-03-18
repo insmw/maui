@@ -7,7 +7,7 @@ using ObjCRuntime;
 using SafariServices;
 using UIKit;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	partial class BrowserImplementation : IBrowser
 	{

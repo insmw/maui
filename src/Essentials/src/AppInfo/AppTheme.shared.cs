@@ -1,4 +1,4 @@
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// Enumerates different themes an operating system or application can show.

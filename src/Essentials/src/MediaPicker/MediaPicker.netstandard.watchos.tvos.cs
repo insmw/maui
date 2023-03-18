@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.ApplicationModel;
+using Microsoft.Maui.Patched.Storage;
 
-namespace Microsoft.Maui.Media
+namespace Microsoft.Maui.Patched.Media
 {
 	partial class MediaPickerImplementation : IMediaPicker
 	{

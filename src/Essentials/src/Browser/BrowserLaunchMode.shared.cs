@@ -1,5 +1,5 @@
 #nullable enable
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// Launch type of the browser.

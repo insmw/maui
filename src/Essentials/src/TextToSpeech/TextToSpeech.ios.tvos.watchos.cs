@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AVFoundation;
 
-namespace Microsoft.Maui.Media
+namespace Microsoft.Maui.Patched.Media
 {
 	partial class TextToSpeechImplementation : ITextToSpeech
 	{

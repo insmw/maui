@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 using Tizen.Applications;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	partial class DeviceDisplayImplementation
 	{

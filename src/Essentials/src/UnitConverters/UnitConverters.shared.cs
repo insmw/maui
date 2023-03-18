@@ -1,6 +1,6 @@
 using System;
 
-namespace Microsoft.Maui.Media
+namespace Microsoft.Maui.Patched.Media
 {
 	/// <summary>
 	/// Static class with built-in unit converters.

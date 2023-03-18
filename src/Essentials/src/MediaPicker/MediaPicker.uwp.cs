@@ -6,8 +6,8 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.ApplicationModel;
+using Microsoft.Maui.Patched.Storage;
 using Windows.Foundation.Collections;
 using Windows.Media.Capture;
 using Windows.Storage;
@@ -16,7 +16,7 @@ using Windows.System;
 using WinRT.Interop;
 using WinLauncher = Windows.System.Launcher;
 
-namespace Microsoft.Maui.Media
+namespace Microsoft.Maui.Patched.Media
 {
 	partial class MediaPickerImplementation : IMediaPicker
 	{
@@ -83,7 +83,7 @@ namespace Microsoft.Maui.Media
 			const string WindowsCameraAppPackageName = "Microsoft.WindowsCamera_8wekyb3d8bbwe";
 			const string WindowsCameraAppUri = "microsoft.windows.camera.picker:";
 
-			const string CacheFolderName = ".Microsoft.Maui.Media.MediaPicker";
+			const string CacheFolderName = ".Microsoft.Maui.Patched.Media.MediaPicker";
 			const string CacheFileName = "capture";
 
 			public WinUICameraCaptureUIPhotoCaptureSettings PhotoSettings { get; } = new();

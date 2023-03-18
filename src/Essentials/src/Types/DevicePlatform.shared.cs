@@ -1,6 +1,6 @@
 using System;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	/// <summary>
 	/// Represents the device platform that the application is running on.

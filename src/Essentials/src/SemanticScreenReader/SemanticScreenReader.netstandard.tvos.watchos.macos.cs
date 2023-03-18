@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 
-namespace Microsoft.Maui.Accessibility
+namespace Microsoft.Maui.Patched.Accessibility
 {
 	partial class SemanticScreenReaderImplementation : ISemanticScreenReader
 	{

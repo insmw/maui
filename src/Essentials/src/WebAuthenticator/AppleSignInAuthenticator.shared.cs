@@ -1,7 +1,7 @@
 #nullable enable
 using System.Threading.Tasks;
 
-namespace Microsoft.Maui.Authentication
+namespace Microsoft.Maui.Patched.Authentication
 {
 	/// <summary>
 	/// Represents platform native Apple Sign In authentication APIs.

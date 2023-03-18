@@ -1,4 +1,4 @@
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// Launch options for opening the installed map application.

@@ -4,7 +4,7 @@ using System.Linq;
 using AndroidAddress = Android.Locations.Address;
 using AndroidLocation = Android.Locations.Location;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	static partial class LocationExtensions
 	{

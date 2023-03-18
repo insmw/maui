@@ -1,4 +1,4 @@
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	// Detect if 3/4ths of the accelerometer events in the last half second are accelerating
 	// this means we are free falling or shaking

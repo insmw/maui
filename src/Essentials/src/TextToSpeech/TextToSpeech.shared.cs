@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Debug = System.Diagnostics.Debug;
 
-namespace Microsoft.Maui.Media
+namespace Microsoft.Maui.Patched.Media
 {
 	/// <summary>
 	/// The TextToSpeech API enables an application to utilize the built-in text-to-speech engines to speak back text from the device and also to query available languages that the engine can support.

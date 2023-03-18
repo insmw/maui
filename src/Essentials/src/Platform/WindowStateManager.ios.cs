@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using UIKit;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// Manager object that manages window states on iOS and macOS.

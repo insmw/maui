@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tizen.Applications;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	partial class BrowserImplementation : IBrowser
 	{

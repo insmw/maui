@@ -4,7 +4,7 @@ using Android.App;
 using Android.Content;
 using Android.Hardware;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	partial class GyroscopeImplementation : IGyroscope
 	{

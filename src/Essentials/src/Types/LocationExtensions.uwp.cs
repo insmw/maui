@@ -5,7 +5,7 @@ using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
 using WindowsARS = Windows.Devices.Geolocation.AltitudeReferenceSystem;
 
-namespace Microsoft.Maui.Devices.Sensors
+namespace Microsoft.Maui.Patched.Devices.Sensors
 {
 	static partial class LocationExtensions
 	{

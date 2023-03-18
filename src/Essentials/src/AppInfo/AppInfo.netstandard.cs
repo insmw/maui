@@ -1,4 +1,4 @@
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	class AppInfoImplementation : IAppInfo
 	{

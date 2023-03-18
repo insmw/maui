@@ -5,15 +5,15 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Text;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.Storage;
 using Uri = Android.Net.Uri;
 
-namespace Microsoft.Maui.ApplicationModel.Communication
+namespace Microsoft.Maui.Patched.ApplicationModel.Communication
 {
 	partial class EmailImplementation : IEmail
 	{
 		static EmailMessage testEmail =>
-			new("Testing Microsoft.Maui.Essentials", "This is a test email.", "Microsoft.Maui.Essentials@example.org");
+			new("Testing Microsoft.Maui.Patched.Essentials", "This is a test email.", "Microsoft.Maui.Patched.Essentials@example.org");
 
 		public bool IsComposeSupported
 			=> PlatformUtils.IsIntentSupported(CreateIntent(testEmail));

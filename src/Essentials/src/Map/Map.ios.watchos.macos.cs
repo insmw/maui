@@ -6,9 +6,9 @@ using Contacts;
 using CoreLocation;
 using Foundation;
 using MapKit;
-using Microsoft.Maui.Devices.Sensors;
+using Microsoft.Maui.Patched.Devices.Sensors;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	class MapImplementation : IMap
 	{

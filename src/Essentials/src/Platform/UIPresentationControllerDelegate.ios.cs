@@ -1,7 +1,7 @@
 ﻿using System;
 using UIKit;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	class UIPresentationControllerDelegate : UIAdaptivePresentationControllerDelegate
 	{

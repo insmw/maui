@@ -2,13 +2,13 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Text.Json;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 using Windows.Storage;
 
 using PreferencesDictionary = System.Collections.Concurrent.ConcurrentDictionary<string, System.Collections.Concurrent.ConcurrentDictionary<string, string>>;
 using ShareNameDictionary = System.Collections.Concurrent.ConcurrentDictionary<string, string>;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	class PreferencesImplementation : IPreferences
 	{

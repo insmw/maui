@@ -1,6 +1,6 @@
 ﻿#nullable enable
 
-namespace Microsoft.Maui.Accessibility
+namespace Microsoft.Maui.Patched.Accessibility
 {
 	/// <summary>
 	/// The SemanticScreenReader API enables an application announce audible text to the user.

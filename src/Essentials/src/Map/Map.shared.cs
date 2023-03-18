@@ -1,9 +1,9 @@
 #nullable enable
 using System;
 using System.Threading.Tasks;
-using Microsoft.Maui.Devices.Sensors;
+using Microsoft.Maui.Patched.Devices.Sensors;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// The Map API enables an application to open the installed map application to a specific location or placemark.

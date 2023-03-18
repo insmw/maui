@@ -1,7 +1,7 @@
 ﻿using System;
 using Android.Views.Accessibility;
 
-namespace Microsoft.Maui.Accessibility
+namespace Microsoft.Maui.Patched.Accessibility
 {
 	partial class SemanticScreenReaderImplementation : ISemanticScreenReader
 	{

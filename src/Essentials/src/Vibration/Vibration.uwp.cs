@@ -2,7 +2,7 @@ using System;
 using Windows.Devices.Haptics;
 using Windows.Foundation.Metadata;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	partial class VibrationImplementation : IVibration
 	{

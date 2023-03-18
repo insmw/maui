@@ -1,6 +1,6 @@
 using System;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	/// <summary>
 	/// Represents the idiom (form factor) of the device.

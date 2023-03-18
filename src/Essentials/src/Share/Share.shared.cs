@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Storage;
+using Microsoft.Maui.Patched.Storage;
 
-namespace Microsoft.Maui.ApplicationModel.DataTransfer
+namespace Microsoft.Maui.Patched.ApplicationModel.DataTransfer
 {
 	/// <summary>
 	/// The Share API enables an application to share data such as text and web links to other applications on the device.

@@ -3,9 +3,9 @@ using Android.App;
 using Android.Content.Res;
 using Android.OS;
 using Android.Provider;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Patched.ApplicationModel;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	class DeviceInfoImplementation : IDeviceInfo
 	{

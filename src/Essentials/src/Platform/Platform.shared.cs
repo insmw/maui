@@ -2,10 +2,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Maui.Authentication;
-using Microsoft.Maui.Devices.Sensors;
+using Microsoft.Maui.Patched.Authentication;
+using Microsoft.Maui.Patched.Devices.Sensors;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	/// <summary>
 	/// A static class that contains platform-specific helper methods.

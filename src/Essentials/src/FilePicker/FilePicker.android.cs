@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Android.Content;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Devices;
+using Microsoft.Maui.Patched.ApplicationModel;
+using Microsoft.Maui.Patched.Devices;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	partial class FilePickerImplementation : IFilePicker
 	{

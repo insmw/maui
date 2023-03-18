@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 
-namespace Microsoft.Maui.ApplicationModel
+namespace Microsoft.Maui.Patched.ApplicationModel
 {
 	class ActiveWindowTracker
 	{

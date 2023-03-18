@@ -4,7 +4,7 @@ using Android.App;
 using Android.Content;
 using Android.Preferences;
 
-namespace Microsoft.Maui.Storage
+namespace Microsoft.Maui.Patched.Storage
 {
 	class PreferencesImplementation : IPreferences
 	{

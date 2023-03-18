@@ -1,7 +1,7 @@
 using System;
 using AudioToolbox;
 
-namespace Microsoft.Maui.Devices
+namespace Microsoft.Maui.Patched.Devices
 {
 	partial class VibrationImplementation : IVibration
 	{
