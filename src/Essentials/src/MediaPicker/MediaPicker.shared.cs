@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using System.Threading.Tasks;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Storage;
@@ -109,5 +110,9 @@ namespace Microsoft.Maui.Media
 		/// </summary>
 		/// <remarks>This title is not guaranteed to be shown on all operating systems.</remarks>
 		public string? Title { get; set; }
+		/// <summary>
+		/// Max length
+		/// </summary>
+		public TimeSpan DesiredLength { get; set; }
 	}
 }

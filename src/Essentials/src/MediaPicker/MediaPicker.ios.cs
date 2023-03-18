@@ -72,6 +72,8 @@ namespace Microsoft.Maui.Media
 			picker.SourceType = sourceType;
 			picker.MediaTypes = new string[] { mediaType };
 			picker.AllowsEditing = false;
+			picker.VideoMaximumDuration = options.DesiredLength.TotalSeconds;
+
 			if (!photo && !pickExisting)
 				picker.CameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Video;
 
