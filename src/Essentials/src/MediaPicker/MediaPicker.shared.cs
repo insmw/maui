@@ -113,6 +113,6 @@ namespace Microsoft.Maui.Media
 		/// <summary>
 		/// Max length
 		/// </summary>
-		public TimeSpan DesiredLength { get; set; }
+		public TimeSpan? DesiredLength { get; set; }
 	}
 }

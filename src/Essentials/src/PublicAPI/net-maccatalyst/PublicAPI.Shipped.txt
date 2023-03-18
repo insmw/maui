@@ -796,6 +796,8 @@ Microsoft.Maui.Media.MediaPickerOptions
 Microsoft.Maui.Media.MediaPickerOptions.MediaPickerOptions() -> void
 Microsoft.Maui.Media.MediaPickerOptions.Title.get -> string?
 Microsoft.Maui.Media.MediaPickerOptions.Title.set -> void
+Microsoft.Maui.Media.MediaPickerOptions.DesiredLength.get -> System.TimeSpan?
+Microsoft.Maui.Media.MediaPickerOptions.DesiredLength.set -> void
 Microsoft.Maui.Media.Screenshot
 Microsoft.Maui.Media.ScreenshotExtensions
 Microsoft.Maui.Media.ScreenshotFormat

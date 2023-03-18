@@ -12,6 +12,7 @@
     <WarningsAsErrors>$(WarningsAsErrors);CS1591</WarningsAsErrors>
     <NoWarn Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">$(NoWarn);CA1420</NoWarn>
   </PropertyGroup>
+  
   <Import Project="$(MauiSrcDirectory)MultiTargeting.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\Graphics\src\Graphics\Graphics.csproj" />
