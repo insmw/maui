@@ -97,6 +97,7 @@ namespace Microsoft.Maui.Media
 					outputUri ??= FileProvider.GetUriForFile(tmpFile);
 					if (options.DesiredLength.HasValue)
 						intent.PutExtra(MediaStore.ExtraDurationLimit, options.DesiredLength.Value.TotalSeconds);
+					intent.PutExtra(MediaStore.ExtraVideoQuality, 1);//Medium
 					intent.PutExtra(MediaStore.ExtraOutput, outputUri);
 				}
 

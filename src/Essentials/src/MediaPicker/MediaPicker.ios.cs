@@ -72,6 +72,7 @@ namespace Microsoft.Maui.Media
 			picker.SourceType = sourceType;
 			picker.MediaTypes = new string[] { mediaType };
 			picker.AllowsEditing = false;
+			picker.VideoQuality = UIImagePickerControllerQualityType.Medium;
 			if (options.DesiredLength.HasValue)
 				picker.VideoMaximumDuration = options.DesiredLength.Value.TotalSeconds;
 
