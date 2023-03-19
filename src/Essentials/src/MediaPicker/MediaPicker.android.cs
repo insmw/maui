@@ -53,8 +53,17 @@ namespace Microsoft.Maui.Patched.Media
 		public Task<FileResult> CapturePhotoAsync(MediaPickerOptions options)
 			=> CaptureAsync(options, true);
 
-		public Task<FileResult> CaptureVideoAsync(MediaPickerOptions options)
-			=> CaptureAsync(options, false);
+		public async Task<FileResult> CaptureVideoAsync(MediaPickerOptions options)
+		{
+			if (!OperatingSystem.IsAndroidVersionAtLeast(33))
+			{
+				return await CaptureAsync(options, false);
+			}
+			else
+			{
+				return await Capture33VideoAsync();
+			}
+		}
 
 		public async Task<FileResult> CaptureAsync(MediaPickerOptions options, bool photo)
 		{
@@ -106,6 +115,36 @@ namespace Microsoft.Maui.Patched.Media
 
 				// Return the file that we just captured
 				return new FileResult(tmpFile.AbsolutePath);
+			}
+			catch (OperationCanceledException)
+			{
+				return null;
+			}
+		}
+		
+		public async Task<FileResult> Capture33VideoAsync()
+		{
+			if (!IsCaptureSupported)
+				throw new FeatureNotSupportedException();
+
+			await Permissions.EnsureGrantedAsync<Permissions.Camera>(); 
+			var capturePhotoIntent = new Intent(MediaStore.ActionVideoCapture);
+			 
+			if (!PlatformUtils.IsIntentSupported(capturePhotoIntent))
+				throw new FeatureNotSupportedException($"Either there was no camera on the device or '{capturePhotoIntent.Action}' was not added to the <queries> element in the app's manifest file. See more: https://developer.android.com/about/versions/11/privacy/package-visibility");
+			
+			try
+			{
+				string path = null;
+				void OnResult(Intent intent)
+				{
+					path = FileSystemUtils.EnsurePhysicalPath(intent.Data);
+				}
+				// Start the capture process
+				await IntermediateActivity.StartAsync(capturePhotoIntent, PlatformUtils.requestCodeMediaCapture, onResult: OnResult);
+
+				// Return the file that we just captured
+				return new FileResult(path);
 			}
 			catch (OperationCanceledException)
 			{
